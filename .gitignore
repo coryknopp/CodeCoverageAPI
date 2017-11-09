@@ -1,1 +1,6 @@
+#OS X junk#
+.DS_Store
+*/.DS_Store
+
+#IDEA IDE#
 .idea/
