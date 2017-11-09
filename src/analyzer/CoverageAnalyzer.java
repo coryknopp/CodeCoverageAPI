@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
 public class CoverageAnalyzer implements ResultsAnalyzer {
 
     public CoverageAnalyzer() {
-
     }
 
     @Override
