@@ -4,3 +4,6 @@
 
 #IDEA IDE#
 .idea/
+
+#CLASS files#
+*.class

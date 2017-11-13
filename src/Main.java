@@ -1,22 +1,17 @@
-import net.sourceforge.cobertura.coveragedata.ClassData;
-import net.sourceforge.cobertura.coveragedata.CoverageDataFileHandler;
-import net.sourceforge.cobertura.coveragedata.ProjectData;
-
-import java.io.File;
+import adapter.CoberturaAdapter;
+import analyzer.CoverageAnalyzer;
+import data_model.CoverageResults;
 
 public class Main {
 
     public static void main(String[] args) {
-        deserialize();
-    }
-
-    private static void deserialize() {
-        // Loads serialized data file, deserializes using built-in Cobertura method and prints class names in file. All
-        // is now accessible, it's just a matter of determining what data we need and how to best store it.
-        ProjectData project = CoverageDataFileHandler.loadCoverageData(new File("triangle/cobertura.ser"));
-        for (Object obj : project.getClasses()) {
-            ClassData classData = (ClassData) obj;
-            System.out.println(classData.getName());
-        }
+        String serFilepath = "triangle/cobertura.ser";  // Just a placeholder for now, should eventually be '= args[0]'
+        // STEP 1: Run Cobertura adapter and output CoverageResults
+        CoberturaAdapter adapter = new CoberturaAdapter();
+        adapter.setFilepath(serFilepath);
+        CoverageResults coverage = adapter.getCoverageResults();
+        // STEP 2: Analyze CoverageResults
+        CoverageAnalyzer analyzer = new CoverageAnalyzer(coverage);
+        // STEP 3: Build simple CoverageResults visualizer
     }
 }

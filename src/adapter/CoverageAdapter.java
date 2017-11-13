@@ -1,7 +1,8 @@
 package adapter;
 
-import data_model.CoverageModel;
+import data_model.CoverageResults;
 
 public interface CoverageAdapter {
-    CoverageModel getCoverageModel();
+
+    CoverageResults getCoverageResults();
 }

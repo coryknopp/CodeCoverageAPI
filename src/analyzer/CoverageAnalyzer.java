@@ -1,41 +1,43 @@
 package analyzer;
 
+import data_model.*;
 import formatter.ResultsAnalyzer;
-
-import java.lang.reflect.Method;
 
 public class CoverageAnalyzer implements ResultsAnalyzer {
 
-    public CoverageAnalyzer() {
+    private CoverageResults coverage;
+
+    public CoverageAnalyzer(CoverageResults coverage) {
+        this.coverage = coverage;
     }
 
     @Override
-    public boolean isLineCovered(int line) {
+    public boolean isLineCovered(Line line) {
         return false;
     }
 
     @Override
-    public boolean isBranchCovered(int branch) {
+    public boolean isBranchCovered(Branch branch) {
         return false;
     }
 
     @Override
-    public boolean isConditionCovered(int line, int condition) {
+    public boolean isConditionCovered(Condition condition) {
         return false;
     }
 
     @Override
-    public int lineCoveredCount(int line) {
+    public int lineCoveredCount(Line line) {
         return 0;
     }
 
     @Override
-    public int branchCoveredCount(int branch) {
+    public int branchCoveredCount(Branch branch) {
         return 0;
     }
 
     @Override
-    public int conditionCoveredCount(int line, int condition) {
+    public int conditionCoveredCount(Condition condition) {
         return 0;
     }
 
@@ -70,32 +72,32 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     @Override
-    public int linesInMethod(Method y) {
+    public int linesInMethod(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int branchesInMethod(Method y) {
+    public int branchesInMethod(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int conditionsInMethod(Method y) {
+    public int conditionsInMethod(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int linesCoveredInMethodCount(Method y) {
+    public int linesCoveredInMethodCount(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int branchesCoveredInMethodCount(Method y) {
+    public int branchesCoveredInMethodCount(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int conditionsCoveredInMethodCount(Method y) {
+    public int conditionsCoveredInMethodCount(TestMethod y) {
         return 0;
     }
 

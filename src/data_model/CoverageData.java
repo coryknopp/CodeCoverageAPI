@@ -1,8 +1,9 @@
 package data_model;
 
-import java.util.Collection;
-
 public interface CoverageData {
-    void add(Object item);
-    void addAll(Collection<Object> collection);
+
+    void addTestMethod(TestMethod testMethod);
+    void addLine(TestMethod testMethod, Line line);
+    void addBranch(TestMethod testMethod, Branch branch);
+    void addCondition(TestMethod testMethod, Condition condition);
 }
