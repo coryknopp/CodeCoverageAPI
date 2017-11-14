@@ -5,7 +5,7 @@ import data_model.CoverageResults;
 public class Main {
 
     public static void main(String[] args) {
-        String serFilepath = "triangle/cobertura.ser";  // Just a placeholder for now, should eventually be '= args[0]'
+        String serFilepath = "../triangle/cobertura.ser";  // Just a placeholder for now, should eventually be '= args[0]'
         // STEP 1: Run Cobertura adapter and output CoverageResults
         CoberturaAdapter adapter = new CoberturaAdapter();
         adapter.setFilepath(serFilepath);
