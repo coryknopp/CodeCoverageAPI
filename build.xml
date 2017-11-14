@@ -27,17 +27,18 @@
 <!-- Compile the project -->
     <target name="compile" depends="init" description="Compile all sources">
         <javac includeantruntime="true" 
-               srcdir="src"
-              destdir="bin"
+                srcdir="src"
+                destdir="bin"
                 debug="yes">
+                <classpath location="lib/cobertura-2.1.1.jar"/>
         </javac>
     </target>
 
 <!-- Compile the test suite -->
     <target name="compile.tests" depends="compile" description="Compile all tests">
         <javac includeantruntime="true" 
-               srcdir="test"
-              destdir="bin"
+                srcdir="test"
+                destdir="bin"
                 debug="yes">
             <classpath location="${junit.jar}"/>
         </javac>
