@@ -11,10 +11,8 @@ public class MapDataModel implements CoverageData {
   }
 
   public void addClassData(ClassData classData) {
-    // Find out how many lines are in this class.
-    SortedSet<net.sourceforge.cobertura.coveragedata.CoverageData> allLines = classData.getLines();
     // Create a new Line object for each line and add that info to the map.
-    for(int i = 0; i < allLines.size(); i++) {
+    for(int i = 0; i < classData.getLines().size(); i++) {
       LineData lineData = classData.getLineData(i);
       Line line = new Line(lineData.getLineNumber(), lineData.isCovered());
       addLine(line);
