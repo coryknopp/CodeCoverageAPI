@@ -35,6 +35,7 @@ public class CoberturaAdapter implements AdapterBuilder, CoverageAdapter {
         CoverageResults coverage = new CoverageResults();
         for (Object obj : project.getClasses()) {
             ClassData classData = (ClassData) obj;
+            coverage.addClassData(classData);
             System.out.println(classData.getName());
         }
         return coverage;
