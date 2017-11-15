@@ -4,17 +4,19 @@ import java.util.*;
 
 public class CoverageResults implements CoverageData {
 
-    private HashMap<Integer, Boolean> lineCoverage;
+    // Holds info about line coverage. String is the class the line is in,
+    // Integer is the line number, and Boolean is if it is covered or not.
+    public static HashMap<String, HashMap<Integer, Boolean>> lineCoverage;
 
     public CoverageResults() {
-        lineCoverage = new HashMap<Integer, Boolean>();
+        lineCoverage = new HashMap<String, HashMap<Integer, Boolean>>();
     }
 
     public void addClassData(ClassData classData) {
       // Create a new Line object for each line and add that info to the map.
       for(int i = 0; i < classData.getLines().size(); i++) {
         LineData lineData = classData.getLineData(i);
-        Line line = new Line(lineData.getLineNumber(), lineData.isCovered());
+        Line line = new Line(classData.getName(), lineData.getLineNumber(), lineData.isCovered());
         addLine(line);
       }
     }
@@ -23,7 +25,7 @@ public class CoverageResults implements CoverageData {
     }
 
     public void addLine(Line line) {
-      lineCoverage.put(line.lineNumber(), line.isCovered());
+      lineCoverage.get(line.className()).put(line.lineNumber(), line.isCovered());
     }
 
     public void addBranch(Branch branch) {

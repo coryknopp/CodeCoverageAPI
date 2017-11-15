@@ -11,9 +11,13 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
         this.coverage = coverage;
     }
 
+    // This should probably be something more like isLineCovered(String className, int lineNumber)
     @Override
     public boolean isLineCovered(Line line) {
-        return false;
+        if(coverage.lineCoverage.get(line.className()).get(line.lineNumber()) == null)
+          return false;
+        else
+          return coverage.lineCoverage.get(line.className()).get(line.lineNumber());
     }
 
     @Override
