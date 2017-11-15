@@ -1,28 +1,35 @@
 package data_model;
+import net.sourceforge.cobertura.coveragedata.*;
+import java.util.*;
 
 public class CoverageResults implements CoverageData {
 
+    private HashMap<Integer, Boolean> lineCoverage;
+
     public CoverageResults() {
-
+        lineCoverage = new HashMap<Integer, Boolean>();
     }
 
-    @Override
-    public void addTestMethod(TestMethod testMethod) {
-
+    public void addClassData(ClassData classData) {
+      // Create a new Line object for each line and add that info to the map.
+      for(int i = 0; i < classData.getLines().size(); i++) {
+        LineData lineData = classData.getLineData(i);
+        Line line = new Line(lineData.getLineNumber(), lineData.isCovered());
+        addLine(line);
+      }
     }
 
-    @Override
-    public void addLine(TestMethod testMethod, Line line) {
-
+    public void addTestMethod(TestMethod testMethod){
     }
 
-    @Override
-    public void addBranch(TestMethod testMethod, Branch branch) {
-
+    public void addLine(Line line) {
+      lineCoverage.put(line.lineNumber(), line.isCovered());
     }
 
-    @Override
-    public void addCondition(TestMethod testMethod, Condition condition) {
-
+    public void addBranch(Branch branch) {
     }
+
+    public void addCondition(Condition condition) {
+    }
+
 }
