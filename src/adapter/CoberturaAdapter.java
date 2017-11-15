@@ -4,6 +4,7 @@ import data_model.CoverageResults;
 import net.sourceforge.cobertura.coveragedata.ClassData;
 import net.sourceforge.cobertura.coveragedata.CoverageDataFileHandler;
 import net.sourceforge.cobertura.coveragedata.ProjectData;
+import java.util.SortedSet;
 
 import java.io.File;
 
