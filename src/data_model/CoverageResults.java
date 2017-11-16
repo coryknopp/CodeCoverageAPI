@@ -7,10 +7,10 @@ public class CoverageResults implements CoverageData {
     // Holds info about line coverage. String is the class the line is in,
     // Integer is the line number, and Boolean is if it is covered or not.
     // <ClassName <LineNumber, isLineCovered>>
-    public static Map<String, HashMap<Integer, Boolean>> lineCoverage;
+    public static Map<String, HashMap<Integer, Line>> lineCoverage;
 
     public CoverageResults() {
-        lineCoverage = new HashMap<String, HashMap<Integer, Boolean>>();
+        lineCoverage = new HashMap<String, HashMap<Integer, Line>>();
     }
 
     // Not sure how to use this yet.
@@ -20,13 +20,13 @@ public class CoverageResults implements CoverageData {
     public void addLine(Line line) {
       // If the class has not yet been added to the map, add it to the map.
       if(lineCoverage.get(line.className()) == null) {
-        HashMap<Integer, Boolean> innerMap = new HashMap<Integer, Boolean>();
-        innerMap.put(line.lineNumber(), line.isCovered());
+        HashMap<Integer, Line> innerMap = new HashMap<Integer, Line>();
+        innerMap.put(line.lineNumber(), line);
         lineCoverage.put(line.className(), innerMap);
       }
 
       // Add the line data to the map.
-      lineCoverage.get(line.className()).put(line.lineNumber(), line.isCovered());
+      lineCoverage.get(line.className()).put(line.lineNumber(), line);
     }
 
     public void addBranch(Branch branch) {
