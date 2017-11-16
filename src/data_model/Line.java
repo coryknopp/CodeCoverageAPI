@@ -27,7 +27,7 @@ public class Line {
   }
   
   public boolean isBranch(){
-    return isBranch
+    return isBranch;
   }
 
 }
