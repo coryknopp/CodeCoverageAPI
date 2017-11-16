@@ -1,5 +1,5 @@
 package data_model;
-import net.sourceforge.cobertura.coveragedata.*;
+
 import java.util.*;
 
 public class CoverageResults implements CoverageData {
@@ -14,7 +14,7 @@ public class CoverageResults implements CoverageData {
     }
 
     // Not sure how to use this yet.
-    public void addTestMethod(TestMethod testMethod){
+    public void addTestMethod(TestMethod testMethod) {
     }
 
     public void addLine(Line line) {
