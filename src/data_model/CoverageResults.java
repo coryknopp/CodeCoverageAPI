@@ -10,10 +10,12 @@ public class CoverageResults implements CoverageData {
     // Holds info about line coverage. String is the class the line is in,
     // Integer is the line number, and Boolean is if it is covered or not.
     // <ClassName <LineNumber, isLineCovered>>
-    public static Map<String, HashMap<Integer, Line>> lineCoverage;
+    private static Map<String, HashMap<Integer, Line>> lineCoverage;
+    private HashMap<Class, HashMap<TestClass, ArrayList<Object>[]>> coverage;
 
     public CoverageResults() {
         lineCoverage = new HashMap<>();
+        coverage = new HashMap<>();
     }
 
     // Not sure how to use this yet.
