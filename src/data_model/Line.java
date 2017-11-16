@@ -5,11 +5,13 @@ public class Line {
   private String className;
   private int lineNumber;
   private boolean isCovered;
+  private boolean isBranch;
 
-  public Line(String className, int lineNumber, boolean isCovered) {
-    this.className = className;
+  public Line(String className, int lineNumber, boolean isCovered, boolean isBranch) {
+    this.className  = className;
     this.lineNumber = lineNumber;
-    this.isCovered = isCovered;
+    this.isCovered  = isCovered;
+    this.isBranch   = isBranch;
   }
 
   public String className() {
@@ -22,6 +24,10 @@ public class Line {
 
   public boolean isCovered() {
     return isCovered;
+  }
+  
+  public boolean isBranch(){
+    return isBranch;
   }
 
 }
