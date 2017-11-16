@@ -18,6 +18,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
           return false;
         else
           return coverage.lineCoverage.get(line.className()).get(line.lineNumber());*/
+        return false;
     }
 
     @Override
