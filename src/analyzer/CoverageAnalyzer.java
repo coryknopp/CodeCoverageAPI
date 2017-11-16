@@ -22,7 +22,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     @Override
     public boolean isBranchCovered(Branch branch) {
-        return false;
+      return false;
     }
 
     @Override
