@@ -8,21 +8,9 @@ public class CoverageResults implements CoverageData {
     // Integer is the line number, and Boolean is if it is covered or not.
     // <ClassName <LineNumber, isLineCovered>>
     public static Map<String, HashMap<Integer, Boolean>> lineCoverage;
-    public static ArrayList<ClassData> allClasses;
 
     public CoverageResults() {
         lineCoverage = new HashMap<String, HashMap<Integer, Boolean>>();
-        allClasses = new ArrayList<ClassData>();
-    }
-
-    public void addClassData(ClassData classData) {
-      allClasses.add(classData);
-      // Create a new Line object for each line in the class and add that data to the map.
-      for(Integer i: classData.getBranches()) {
-        LineData lineData = classData.getLineData(i);
-        Line line = new Line(classData.getName(), lineData.getLineNumber(), lineData.isCovered());
-        addLine(line);
-      }
     }
 
     // Not sure how to use this yet.
