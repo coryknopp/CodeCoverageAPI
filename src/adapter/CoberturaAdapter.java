@@ -51,7 +51,7 @@ public class CoberturaAdapter implements AdapterBuilder, CoverageAdapter {
         // Create a new Line object for each line in the class and add that data to the map.
         for (Integer i : classData.getBranches()) {
             LineData lineData = classData.getLineData(i);
-            Line line = new Line(classData.getName(), lineData.getLineNumber(), lineData.isCovered());
+            Line line = new Line(classData.getName(), lineData.getLineNumber(), lineData.isCovered(), lineData.hasBranch());
             coverage.addLine(line);
         }
     }
