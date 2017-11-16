@@ -4,6 +4,9 @@ import java.util.*;
 
 public class CoverageResults implements CoverageData {
 
+    // Data model:
+    // HashMap<Class, HashMap<TestClass, ArrayList<Object>[]>>
+
     // Holds info about line coverage. String is the class the line is in,
     // Integer is the line number, and Boolean is if it is covered or not.
     // <ClassName <LineNumber, isLineCovered>>
