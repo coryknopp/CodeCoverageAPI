@@ -4,43 +4,69 @@ import java.util.*;
 
 public class CoverageResults implements CoverageData {
 
-    // Data model:
-    // HashMap<Class, HashMap<TestClass, ArrayList<Object>[]>>
+  // The data model is HashMap<String, HashMap<TestMethod, Object[]>> .
+  // The Object[] holds three array lists of Lines, Branches, and Conditions.
+  // The TestMethod is the test that hit those Lines, Branches and Conditions.
+  private HashMap<String, HashMap<TestClass, Object[]>> coverage;
+  private ArrayList<TestClass> allTests = new ArrayList<TestClass>();
 
-    // Holds info about line coverage. String is the class the line is in,
-    // Integer is the line number, and Boolean is if it is covered or not.
-    // <ClassName <LineNumber, isLineCovered>>
-    private static Map<String, HashMap<Integer, Line>> lineCoverage;
-    private HashMap<Class, HashMap<TestClass, ArrayList<Object>[]>> coverage;
+  public CoverageResults() {
+      coverage = new HashMap<String, HashMap<TestClass, Object[]>>();
+      allTests = new ArrayList<TestClass>();
+  }
 
-    public CoverageResults() {
-        lineCoverage = new HashMap<>();
-        coverage = new HashMap<>();
+  // Add the testMethod to the array with all test methods.
+  public void addTestMethod(TestClass testClass) {
+    allTests.add(testClass);
+  }
+
+  @SuppressWarnings("unchecked")
+  public void addLine(TestClass testClass, String className, Line line) {
+    addClassAndTest(testClass, className);
+    Object[] objectArray = coverage.get(className).get(testClass);
+    ArrayList<Line> lineList = ((ArrayList<Line>)objectArray[0]);
+    lineList.add(line);
+    objectArray[0] = lineList;
+    coverage.get(className).put(testClass, objectArray);
+  }
+
+  @SuppressWarnings("unchecked")
+  public void addBranch(TestClass testClass, String className, Branch branch) {
+    addClassAndTest(testClass, className);
+    Object[] objectArray = coverage.get(className).get(testClass);
+    ArrayList<Branch> branchList = ((ArrayList<Branch>)objectArray[1]);
+    branchList.add(branch);
+    objectArray[1] = branchList;
+    coverage.get(className).put(testClass, objectArray);
+  }
+
+  @SuppressWarnings("unchecked")
+  public void addCondition(TestClass testClass, String className, Condition condition) {
+    addClassAndTest(testClass, className);
+    Object[] objectArray = coverage.get(className).get(testClass);
+    ArrayList<Condition> conditionList = ((ArrayList<Condition>)objectArray[2]);
+    conditionList.add(condition);
+    objectArray[2] = conditionList;
+    coverage.get(className).put(testClass, objectArray);
+  }
+
+  // Add the class and test to the map.
+  public void addClassAndTest(TestClass testClass, String className) {
+    if(coverage.get(className) == null) {
+      HashMap<TestClass, Object[]> innerMap = new HashMap<TestClass,  Object[]>();
+      coverage.put(className, innerMap);
+    }
+    if(coverage.get(className).get(testClass) == null) {
+      Object[] objectArray = new Object[3];
+      ArrayList<Line> lineArrayList = new ArrayList<Line>();
+      ArrayList<Branch> branchArrayList = new ArrayList<Branch>();
+      ArrayList<Condition> conditionArrayList = new ArrayList<Condition>();
+      objectArray[0] = lineArrayList;
+      objectArray[1] = branchArrayList;
+      objectArray[2] = conditionArrayList;
+      coverage.get(className).put(testClass, objectArray);
     }
 
-    // Not sure how to use this yet.
-    public void addTestMethod(TestClass testClass) {
+  }
 
-    }
-
-    public void addLine(Line line) {
-        // If the class has not yet been added to the map, add it to the map.
-        if(lineCoverage.get(line.className()) == null) {
-            HashMap<Integer, Line> innerMap = new HashMap<>();
-            innerMap.put(line.lineNumber(), line);
-            lineCoverage.put(line.className(), innerMap);
-        }
-
-        // Add the line data to the map.
-        lineCoverage.get(line.className()).put(line.lineNumber(), line);
-    }
-
-    public void addBranch(Branch branch) {
-        // How do we identify a branch? Can we just use its line number?
-        // If so we don't need to add anything to the data structure for this.
-    }
-
-    public void addCondition(Condition condition) {
-
-    }
 }
