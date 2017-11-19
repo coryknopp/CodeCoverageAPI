@@ -1,42 +1,18 @@
 package data_model;
-import java.util.*;
+
+import java.util.ArrayList;
 
 public class Branch {
 
-    private Line line;
-    private String className;
-    private int lineNumber;
-    private boolean isCovered;
-    private ArrayList<Boolean> conditions;
+  private Line line;
 
-    public Branch(String className, int lineNumber, boolean isCovered, ArrayList<Boolean> conditions) {
-        this.className = className;
-        this.lineNumber = lineNumber;
-        this.isCovered = isCovered;
-        this.conditions = conditions;
-    }
+  public Branch(Line line) {
+    this.line = line;
+  }
 
-    public Branch(Line line) {
-        this.line = line;
-    }
+  public Line getLine() {
+    return line;
+  }
 
-    public String className() {
-        return className;
-    }
 
-    public int lineNumber() {
-        return lineNumber;
-    }
-
-    public boolean isCovered() {
-        return isCovered;
-    }
-
-    public ArrayList<Boolean> conditions() {
-        return conditions;
-    }
-
-    public Line getLine() {
-        return line;
-    }
 }
