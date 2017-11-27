@@ -5,5 +5,10 @@
 #IDEA IDE#
 .idea/
 
-#CLASS files#
+#Class files#
 *.class
+
+#Cobertura files#
+.instrumented/
+coverage_results/
+bin/

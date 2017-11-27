@@ -1,0 +1,110 @@
+<project name="Code Coverage API" default="compile" basedir=".">
+
+    <property name="dir.cov"
+              value="coverage_results"/>
+    <property name="junit.jar"
+              value="lib/junit-4.11.jar"/>
+
+    <!-- Configuration for Cobertura -->
+    <path id="cobertura.classpath">
+        <fileset dir="lib">
+            <include name="cobertura-2.0.3.jar"/>
+            <include name="cobertura-lib/**/*.jar"/>
+        </fileset>
+    </path>
+    <taskdef classpathref="cobertura.classpath"
+             resource="tasks.properties"/>
+
+    <!-- Clean up -->
+    <target name="clean"
+            description="Clean">
+        <delete dir="bin"/>
+        <delete>
+            <fileset dir="."
+                     includes="*.ser"/>
+        </delete>
+        <delete dir="${dir.cov}"/>
+    </target>
+
+    <!-- Initialize build -->
+    <target name="init">
+        <mkdir dir="bin"/>
+    </target>
+
+    <!-- Compile the project -->
+    <target name="compile"
+            depends="init"
+            description="Compile all sources">
+        <javac includeantruntime="true"
+               srcdir="project/src"
+               destdir="bin"
+               source="1.7"
+               target="1.7"
+               compiler="javac1.7"
+               nowarn="true"
+               debug="yes">
+        </javac>
+    </target>
+
+    <!-- Compile the test suite -->
+    <target name="compile.tests"
+            depends="compile"
+            description="Compile all tests">
+        <javac includeantruntime="true"
+               srcdir="project/test"
+               destdir="bin"
+               source="1.7"
+               target="1.7"
+               compiler="javac1.7"
+               nowarn="true"
+               debug="yes">
+            <classpath location="${junit.jar}"/>
+        </javac>
+    </target>
+
+    <!-- Execute the test suite -->
+    <target name="test"
+            depends="compile.tests"
+            description="Run all unit test cases">
+        <echo message="Running unit tests ..."/>
+        <junit printsummary="true"
+               showoutput="true"
+               fork="true"
+               haltonfailure="false">
+            <formatter type="plain"
+                       usefile="false"/>
+            <classpath path=".instrumented"/>
+            <classpath path="bin"/>
+            <classpath location="${junit.jar}"/>
+            <classpath location="lib/cobertura-2.0.3.jar"/>
+            <batchtest fork="true">
+                <fileset dir="project/test">
+                    <include name="**/*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Get coverage information -->
+    <target name="coverage"
+            description="Run coverage analysis">
+        <antcall target="clean" />
+        <antcall target="compile" />
+        <cobertura-instrument failOnError="true"
+                              toDir=".instrumented">
+            <fileset dir="bin">
+                <include name="**/*.class"/>
+            </fileset>
+        </cobertura-instrument>
+        <antcall target="test" />
+        <delete dir="${dir.cov}"/>
+        <mkdir dir="${dir.cov}" />
+        <cobertura-report format="html"
+                          destdir="${dir.cov}"
+                          srcdir="project/src" />
+        <cobertura-report format="summaryXml"
+                          destdir="${dir.cov}"
+                          srcdir="project/src" />
+    </target>
+
+</project>
