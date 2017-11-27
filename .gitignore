@@ -12,3 +12,4 @@
 .instrumented/
 coverage_results/
 bin/
+cobertura.ser

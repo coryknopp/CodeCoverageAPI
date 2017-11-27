@@ -2,13 +2,15 @@
 
     <property name="dir.cov"
               value="coverage_results"/>
-    <property name="junit.jar"
+    <property name="junit"
               value="lib/junit-4.11.jar"/>
+    <property name="cobertura"
+              value="cobertura-2.0.3.jar"/>
 
     <!-- Configuration for Cobertura -->
     <path id="cobertura.classpath">
         <fileset dir="lib">
-            <include name="cobertura-2.0.3.jar"/>
+            <include name="${cobertura}"/>
             <include name="cobertura-lib/**/*.jar"/>
         </fileset>
     </path>
@@ -58,7 +60,7 @@
                compiler="javac1.7"
                nowarn="true"
                debug="yes">
-            <classpath location="${junit.jar}"/>
+            <classpath location="${junit}"/>
         </javac>
     </target>
 
@@ -75,8 +77,8 @@
                        usefile="false"/>
             <classpath path=".instrumented"/>
             <classpath path="bin"/>
-            <classpath location="${junit.jar}"/>
-            <classpath location="lib/cobertura-2.0.3.jar"/>
+            <classpath location="${junit}"/>
+            <classpath location="lib/${cobertura}"/>
             <batchtest fork="true">
                 <fileset dir="project/test">
                     <include name="**/*.java"/>

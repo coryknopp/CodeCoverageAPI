@@ -1,0 +1,81 @@
+<project name="Code Coverage API" default="compile" basedir=".">
+
+    <property name="junit"
+              value="lib/junit-4.11.jar"/>
+    <property name="cobertura"
+              value="lib/cobertura-2.0.3.jar"/>
+
+    <!-- Clean up -->
+    <target name="clean"
+            description="Clean">
+        <delete dir="output"/>
+    </target>
+
+    <!-- Initialize build -->
+    <target name="init">
+        <mkdir dir="output"/>
+    </target>
+
+    <!-- Compile the project -->
+    <target name="compile"
+            depends="init"
+            description="Compile all sources">
+        <javac includeantruntime="true"
+               srcdir="src"
+               destdir="output"
+               nowarn="true"
+               debug="yes">
+            <classpath location="${cobertura}"/>
+        </javac>
+    </target>
+
+    <!-- Compile the test suite -->
+    <target name="compile.tests"
+            depends="compile"
+            description="Compile all tests">
+        <javac includeantruntime="true"
+               srcdir="test"
+               destdir="output"
+               nowarn="true"
+               debug="yes">
+            <classpath location="${junit}"/>
+        </javac>
+    </target>
+
+    <!-- Execute the test suite -->
+    <target name="test"
+            depends="compile.tests"
+            description="Run all unit test cases">
+        <echo message="Running unit tests ..."/>
+        <junit printsummary="true"
+               showoutput="true"
+               fork="true"
+               haltonfailure="false">
+            <formatter type="plain"
+                       usefile="false"/>
+            <classpath path="output"/>
+            <classpath location="${junit}"/>
+            <batchtest fork="true">
+                <fileset dir="test">
+                    <include name="**/*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- Execute coverage API -->
+    <target name="run"
+            depends="compile"
+            description="Run coverage API">
+        <echo message="Running coverage API..."/>
+        <java classname="Main">
+            <arg value="cobertura.ser"/>
+            <classpath>
+                <pathelement location="output"/>
+                <pathelement location="${junit}"/>
+                <pathelement location="${cobertura}"/>
+            </classpath>
+        </java>
+    </target>
+
+</project>
