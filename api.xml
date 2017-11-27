@@ -14,6 +14,7 @@
     <!-- Initialize build -->
     <target name="init">
         <mkdir dir="output"/>
+        <mkdir dir="test"/>
     </target>
 
     <!-- Compile the project -->

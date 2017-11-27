@@ -13,3 +13,6 @@
 coverage_results/
 bin/
 cobertura.ser
+
+#Results output#
+coverageResults.csv
