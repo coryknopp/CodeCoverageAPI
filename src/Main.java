@@ -1,6 +1,7 @@
 import adapter.CoberturaAdapter;
 import analyzer.CoverageAnalyzer;
 import data_model.CoverageResults;
+import formatter.CSVFormatter;
 
 public class Main {
 
@@ -13,5 +14,6 @@ public class Main {
         // STEP 2: Analyze CoverageResults
         CoverageAnalyzer analyzer = new CoverageAnalyzer(coverage);
         // STEP 3: Build simple CoverageResults visualizer
+        CSVFormatter.drawOutput(analyzer);
     }
 }

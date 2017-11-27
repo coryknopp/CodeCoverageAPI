@@ -15,9 +15,9 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     @Override
     public boolean isLineCovered(Line line) {
         /*if(coverage.lineCoverage.get(line.className()).get(line.lineNumber()) == null)
-          return false;
+            return false;
         else
-          return coverage.lineCoverage.get(line.className()).get(line.lineNumber());*/
+            return coverage.lineCoverage.get(line.className()).get(line.lineNumber());*/
         return false;
     }
 

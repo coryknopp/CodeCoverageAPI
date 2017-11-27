@@ -6,8 +6,8 @@ public class Line {
   private String methodName;
 
   public Line(int lineNumber, String methodName) {
-    this.lineNumber = lineNumber;
-    this.methodName = methodName;
+      this.lineNumber = lineNumber;
+      this.methodName = methodName;
   }
 
   public int getLineNumber() {
