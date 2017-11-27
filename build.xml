@@ -1,5 +1,6 @@
 <project name="Code Coverage API" default="compile" basedir=".">
 
+    <!-- Testing -->
 
     <!-- Configuration for cobertura -->
     <path id="cobertura.classpath">
@@ -10,55 +11,55 @@
     </path>
     <taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
 
-
     <!-- JUnit lib -->
     <property name="junit.jar" value="lib/cobertura-2.1.1/lib/junit-4.11.jar"/>
 
-<!-- Clean up -->
+    <!-- Clean up -->
     <target name="clean" description="Clean">
         <delete dir="bin"/>
     </target>
 
-<!-- Initialize build -->
+    <!-- Initialize build -->
     <target name="init">
         <mkdir dir="bin"/>
     </target>
 
-<!-- Compile the project -->
+    <!-- Compile the project -->
     <target name="compile" depends="init" description="Compile all sources">
-        <javac includeantruntime="true" 
-                srcdir="src"
-                destdir="bin"
-                debug="yes">
-                <classpath location="lib/cobertura-2.1.1.jar"/>
+        <javac includeantruntime="true"
+               srcdir="src"
+               destdir="bin"
+               debug="yes">
+            <classpath location="lib/cobertura-2.1.1.jar"/>
         </javac>
     </target>
 
-<!-- Compile the test suite -->
+    <!-- Compile the test suite -->
     <target name="compile.tests" depends="compile" description="Compile all tests">
-        <javac includeantruntime="true" 
-                srcdir="test"
-                destdir="bin"
-                debug="yes">
+        <javac includeantruntime="true"
+               srcdir="test"
+               destdir="bin"
+               debug="yes">
             <classpath location="${junit.jar}"/>
         </javac>
     </target>
 
-<!-- Execute the test suite -->
+    <!-- Execute the test suite -->
     <target name="test" depends="compile.tests" description="Run all unit tests">
         <echo message="Running unit tests ..."/>
-        <junit  printsummary="true" 
-        		showoutput="true" 
+        <junit  printsummary="true"
+                showoutput="true"
                 haltonfailure="false">
             <formatter type="plain" usefile="false"/>
             <classpath path="bin"/>
             <classpath location="${junit.jar}"/>
-			
-			<batchtest fork="no">
+
+            <batchtest fork="no">
                 <fileset dir="test">
-                    <include name="**/*TestFinalResults.java"/>
+                    <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
         </junit>
     </target>
+
 </project>
