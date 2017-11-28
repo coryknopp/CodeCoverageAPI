@@ -90,23 +90,23 @@
     <!-- Get coverage information -->
     <target name="coverage"
             description="Run coverage analysis">
-        <antcall target="clean" />
-        <antcall target="compile" />
+        <antcall target="clean"/>
+        <antcall target="compile"/>
         <cobertura-instrument failOnError="true"
                               toDir=".instrumented">
             <fileset dir="bin">
                 <include name="**/*.class"/>
             </fileset>
         </cobertura-instrument>
-        <antcall target="test" />
+        <antcall target="test"/>
         <delete dir="${dir.cov}"/>
-        <mkdir dir="${dir.cov}" />
+        <mkdir dir="${dir.cov}"/>
         <cobertura-report format="html"
                           destdir="${dir.cov}"
-                          srcdir="project/src" />
+                          srcdir="project/src"/>
         <cobertura-report format="summaryXml"
                           destdir="${dir.cov}"
-                          srcdir="project/src" />
+                          srcdir="project/src"/>
     </target>
 
 </project>
