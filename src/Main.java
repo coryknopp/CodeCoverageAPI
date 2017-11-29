@@ -6,6 +6,9 @@ import formatter.CSVFormatter;
 public class Main {
 
     // 1. How are test methods/classes accessed from Cobertura?
+            //      int[] linesCoveredByTest(Class<?> z);
+            //      int[] branchesCoveredByTest(Class<?> z);
+            //      int[] conditionsCoveredByTest(Class<?> z);
     // 2. How should the API be used at the end? From within Java code as an object?
 
     public static void main(String[] args) {

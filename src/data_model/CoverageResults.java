@@ -8,8 +8,8 @@ public class CoverageResults implements CoverageData {
     // The ArrayList<Object>[] holds three array lists of Lines, Branches, and Conditions.
     // The TestMethod is the test that hit those Lines, Branches and Conditions.
     // private HashMap<String, HashMap<String, ArrayList<Object>[]>> coverage;
-    private HashMap<String, HashMap<String, Object[]>> coverage;
-    // private HashMap<String, ClassData> coverage;
+    // private HashMap<String, HashMap<String, Object[]>> coverage;
+    private HashMap<String, ProjectData> coverage;
     private ArrayList<String> allTests = new ArrayList<>();
 
     public CoverageResults() {
@@ -18,17 +18,17 @@ public class CoverageResults implements CoverageData {
     }
 
     // Add the testMethod to the array with all test methods.
-    public void addTestMethod(String testMethod) {
-        allTests.add(testMethod);
+    public void addMethod(String method) {
+        allTests.add(method);
     }
 
-    public void addLine(String testMethod, String className, Line line) {
-        addClassAndTest(testMethod, className);
-        Object[] objectArray = coverage.get(className).get(testMethod);
+    public void addLine(String method, String className, Line line) {
+        addClassAndTest(method, className);
+        Object[] objectArray = coverage.get(className).get(method);
         ArrayList<Line> lineList = ((ArrayList<Line>) objectArray[0]);
         lineList.add(line);
         objectArray[0] = lineList;
-        coverage.get(className).put(testMethod, objectArray);
+        coverage.get(className).put(method, objectArray);
     }
 
     public void addBranch(String testMethod, String className, Branch branch) {
@@ -66,43 +66,7 @@ public class CoverageResults implements CoverageData {
         }
     }
 
-    public Line getLine(int line) {
-        return null;
-    }
-
-    public Branch getBranch(int line) {
-        return null;
-    }
-
-    public Condition getCondition(int line, int condition) {
-        return null;
-    }
-
-    public String getTestClass(String name) {
-        return null;
-    }
-
-    public boolean getLineCoverage(int line, String className) {
-        /*ArrayList<Object> lineList = coverage.get(className).get("Temporary test")[0];
-        for (Object obj : lineList) {
-            Line l = (Line) obj;
-            if (line == l.getLineNumber()) {
-                return true;
-            }
-        }
-        return false;*/
-        return false;
-    }
-
-    public boolean getBranchCoverage(int branch, String className) {
-        return false;
-    }
-
-    public boolean getConditionCoverage(int line, int condition) {
-        return false;
-    }
-
-    public boolean getTestClassCoverage(String testMethod) {
-        return false;
+    public HashMap<String, ProjectData> getProjectData() {
+        return coverage;
     }
 }

@@ -5,7 +5,6 @@ import data_model.*;
 import net.sourceforge.cobertura.coveragedata.ClassData;
 import net.sourceforge.cobertura.coveragedata.CoverageDataFileHandler;
 import net.sourceforge.cobertura.coveragedata.LineData;
-import net.sourceforge.cobertura.coveragedata.ProjectData;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -24,15 +23,15 @@ public class CoberturaAdapter implements CoverageAdapter {
 
     @Override
     public CoverageResults getCoverageResults() {
-        ProjectData project = deserialize();
+        net.sourceforge.cobertura.coveragedata.ProjectData project = deserialize();
         return parseData(project);
     }
 
-    private ProjectData deserialize() {
+    private net.sourceforge.cobertura.coveragedata.ProjectData deserialize() {
         return CoverageDataFileHandler.loadCoverageData(new File(filepath));
     }
 
-    private CoverageResults parseData(ProjectData project) {
+    private CoverageResults parseData(net.sourceforge.cobertura.coveragedata.ProjectData project) {
         for (Object obj : project.getClasses()) {
             ClassData classData = (ClassData) obj;
             addClassData(classData);
@@ -40,14 +39,14 @@ public class CoberturaAdapter implements CoverageAdapter {
         return coverage;
     }
 
-    private void addClassData(ClassData classData) {
+    private void _addClassData(ClassData classData) {
         // Add this class to the array list holding all class data.
         allClasses.add(classData);
         // Get the class name of this class.
         String className = classData.getName();
         // This is a placeholder.
         String testName = "Tempory test";
-        coverage.addTestMethod(testName);
+        coverage.addMethod(testName);
         // For each line in the class:
         for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
             // CoverageData does not have a getLineNumber method. However, c.toString()
@@ -65,13 +64,19 @@ public class CoberturaAdapter implements CoverageAdapter {
             if (lineData.hasBranch()) {
                 Branch branch = new Branch(line);
                 coverage.addBranch(testName, className, branch);
-                // For each condition fo this branch, make a Condition object and add it to
+                // For each condition for this branch, make a Condition object and add it to
                 // the data model.
                 for (int index = 0; index < lineData.getConditionSize(); index++) {
-                   Condition condition = new Condition(line, branch, index);
-                   coverage.addCondition(testName, className, condition);
+                    Condition condition = new Condition(line, branch, index);
+                    coverage.addCondition(testName, className, condition);
                 }
             }
         }
+    }
+
+    private void addClassData(ClassData classData) {
+        allClasses.add(classData);
+        ProjectData projectData = new ProjectData(classData.getName());
+        // iterate over class lines, if initializes method, create new method
     }
 }
