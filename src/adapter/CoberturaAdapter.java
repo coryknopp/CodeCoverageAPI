@@ -59,7 +59,7 @@ public class CoberturaAdapter implements CoverageAdapter {
             // Get the lineData at this lineNumber.
             LineData lineData = classData.getLineData(i);
             // Make a Line object and add it to the data model.
-            Line line = new Line(lineData.getLineNumber(), lineData.getMethodName());
+            Line line = new Line(lineData.getLineNumber());
             coverage.addLine(testName, className, line);
             // If the line is a branch, make a Branch object and add it to the data model.
             if (lineData.hasBranch()) {

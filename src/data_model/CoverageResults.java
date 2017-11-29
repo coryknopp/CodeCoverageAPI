@@ -25,7 +25,7 @@ public class CoverageResults implements CoverageData {
     public void addLine(String testMethod, String className, Line line) {
         addClassAndTest(testMethod, className);
         Object[] objectArray = coverage.get(className).get(testMethod);
-        ArrayList<Line> lineList = ((ArrayList<Line>)objectArray[0]);
+        ArrayList<Line> lineList = ((ArrayList<Line>) objectArray[0]);
         lineList.add(line);
         objectArray[0] = lineList;
         coverage.get(className).put(testMethod, objectArray);
@@ -34,7 +34,7 @@ public class CoverageResults implements CoverageData {
     public void addBranch(String testMethod, String className, Branch branch) {
         addClassAndTest(testMethod, className);
         Object[] objectArray = coverage.get(className).get(testMethod);
-        ArrayList<Branch> branchList = ((ArrayList<Branch>)objectArray[1]);
+        ArrayList<Branch> branchList = ((ArrayList<Branch>) objectArray[1]);
         branchList.add(branch);
         objectArray[1] = branchList;
         coverage.get(className).put(testMethod, objectArray);
@@ -43,7 +43,7 @@ public class CoverageResults implements CoverageData {
     public void addCondition(String testMethod, String className, Condition condition) {
         addClassAndTest(testMethod, className);
         Object[] objectArray = coverage.get(className).get(testMethod);
-        ArrayList<Condition> conditionList = ((ArrayList<Condition>)objectArray[2]);
+        ArrayList<Condition> conditionList = ((ArrayList<Condition>) objectArray[2]);
         conditionList.add(condition);
         objectArray[2] = conditionList;
         coverage.get(className).put(testMethod, objectArray);
@@ -70,11 +70,11 @@ public class CoverageResults implements CoverageData {
         return null;
     }
 
-    public Branch getBranch(Line line) {
+    public Branch getBranch(int line) {
         return null;
     }
 
-    public Condition getCondition(Line line, int condition) {
+    public Condition getCondition(int line, int condition) {
         return null;
     }
 
@@ -94,11 +94,11 @@ public class CoverageResults implements CoverageData {
         return false;
     }
 
-    public boolean getBranchCoverage(Branch branch) {
+    public boolean getBranchCoverage(int branch, String className) {
         return false;
     }
 
-    public boolean getConditionCoverage(Condition condition) {
+    public boolean getConditionCoverage(int line, int condition) {
         return false;
     }
 

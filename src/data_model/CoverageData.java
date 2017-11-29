@@ -7,11 +7,11 @@ public interface CoverageData {
       void addBranch(String testMethod, String className, Branch branch);
       void addCondition(String testMethod, String className, Condition condition);
       Line getLine(int line);
-      Branch getBranch(Line line);
-      Condition getCondition(Line line, int condition);
+      Branch getBranch(int line);
+      Condition getCondition(int line, int condition);
       String getTestClass(String name);
       boolean getLineCoverage(int line, String className);
-      boolean getBranchCoverage(Branch branch);
-      boolean getConditionCoverage(Condition condition);
+      boolean getBranchCoverage(int branch, String className);
+      boolean getConditionCoverage(int line, int condition);
       boolean getTestClassCoverage(String testMethod);
 }
