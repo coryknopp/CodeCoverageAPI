@@ -8,8 +8,7 @@ public class Main {
     public static void main(String[] args) {
         String serFilepath = args[0];
         // STEP 1: Run Cobertura adapter and output CoverageResults
-        CoberturaAdapter adapter = new CoberturaAdapter();
-        adapter.setFilepath(serFilepath);
+        CoberturaAdapter adapter = new CoberturaAdapter(serFilepath);
         CoverageResults coverage = adapter.getCoverageResults();
         // STEP 2: Analyze CoverageResults
         CoverageAnalyzer analyzer = new CoverageAnalyzer(coverage);

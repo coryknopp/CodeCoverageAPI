@@ -10,13 +10,14 @@ import net.sourceforge.cobertura.coveragedata.ProjectData;
 import java.util.ArrayList;
 import java.io.File;
 
-public class CoberturaAdapter implements AdapterBuilder, CoverageAdapter {
+public class CoberturaAdapter implements CoverageAdapter {
 
     private CoverageResults coverage;
     private String filepath;
     private static ArrayList<ClassData> allClasses;
 
-    public CoberturaAdapter() {
+    public CoberturaAdapter(String filepath) {
+        this.filepath = filepath;
         coverage = new CoverageResults();
         allClasses = new ArrayList<>();
     }
@@ -25,11 +26,6 @@ public class CoberturaAdapter implements AdapterBuilder, CoverageAdapter {
     public CoverageResults getCoverageResults() {
         ProjectData project = deserialize();
         return parseData(project);
-    }
-
-    @Override
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
     }
 
     private ProjectData deserialize() {
@@ -50,7 +46,7 @@ public class CoberturaAdapter implements AdapterBuilder, CoverageAdapter {
         // Get the class name of this class.
         String className = classData.getName();
         // This is a placeholder.
-        TestClass testName = new TestClass(CoverageAdapter.class, "Temporary Test");
+        TestMethod testName = new TestMethod(CoverageAdapter.class, "Temporary Test");
         coverage.addTestMethod(testName);
         // For each line in the class:
         for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {

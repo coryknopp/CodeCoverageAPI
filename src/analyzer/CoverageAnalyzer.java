@@ -77,32 +77,32 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     @Override
-    public int linesInMethod(TestClass y) {
+    public int linesInMethod(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int branchesInMethod(TestClass y) {
+    public int branchesInMethod(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int conditionsInMethod(TestClass y) {
+    public int conditionsInMethod(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int linesCoveredInMethodCount(TestClass y) {
+    public int linesCoveredInMethodCount(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int branchesCoveredInMethodCount(TestClass y) {
+    public int branchesCoveredInMethodCount(TestMethod y) {
         return 0;
     }
 
     @Override
-    public int conditionsCoveredInMethodCount(TestClass y) {
+    public int conditionsCoveredInMethodCount(TestMethod y) {
         return 0;
     }
 
