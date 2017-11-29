@@ -46,7 +46,7 @@ public class CoberturaAdapter implements CoverageAdapter {
         // Get the class name of this class.
         String className = classData.getName();
         // This is a placeholder.
-        TestMethod testName = new TestMethod(CoverageAdapter.class, "Temporary Test");
+        String testName = "Tempory test";
         coverage.addTestMethod(testName);
         // For each line in the class:
         for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {

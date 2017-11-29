@@ -3,7 +3,6 @@ package formatter;
 import data_model.Branch;
 import data_model.Condition;
 import data_model.Line;
-import data_model.TestMethod;
 
 public interface ResultsAnalyzer {
 
@@ -19,12 +18,12 @@ public interface ResultsAnalyzer {
     int totalLinesCovered();
     int totalBranchesCovered();
     int totalConditionsCovered();
-    int linesInMethod(TestMethod y);
-    int branchesInMethod(TestMethod y);
-    int conditionsInMethod(TestMethod y);
-    int linesCoveredInMethodCount(TestMethod y);
-    int branchesCoveredInMethodCount(TestMethod y);
-    int conditionsCoveredInMethodCount(TestMethod y);
+    int linesInMethod(String y);
+    int branchesInMethod(String y);
+    int conditionsInMethod(String y);
+    int linesCoveredInMethodCount(String y);
+    int branchesCoveredInMethodCount(String y);
+    int conditionsCoveredInMethodCount(String y);
     int[] linesCoveredByTest(Class<?> z);
     int[] branchesCoveredByTest(Class<?> z);
     int[] conditionsCoveredByTest(Class<?> z);

@@ -76,7 +76,7 @@ public class CoverageResults implements CoverageData {
         return null;
     }
 
-    public TestMethod getTestClass(String name) {
+    public String getTestClass(String name) {
         return null;
     }
 
