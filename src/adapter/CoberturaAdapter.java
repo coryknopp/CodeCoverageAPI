@@ -78,5 +78,8 @@ public class CoberturaAdapter implements CoverageAdapter {
         allClasses.add(classData);
         ProjectData projectData = new ProjectData(classData.getName());
         // iterate over class lines, if initializes method, create new method
+        for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
+
+        }
     }
 }
