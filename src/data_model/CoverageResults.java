@@ -8,11 +8,11 @@ public class CoverageResults implements CoverageData {
     // The Object[] holds three array lists of Lines, Branches, and Conditions.
     // The TestMethod is the test that hit those Lines, Branches and Conditions.
     private HashMap<String, HashMap<TestClass, Object[]>> coverage;
-    private ArrayList<TestClass> allTests = new ArrayList<TestClass>();
+    private ArrayList<TestClass> allTests = new ArrayList<>();
 
     public CoverageResults() {
-        coverage = new HashMap<String, HashMap<TestClass, Object[]>>();
-        allTests = new ArrayList<TestClass>();
+        coverage = new HashMap<>();
+        allTests = new ArrayList<>();
     }
 
     // Add the testMethod to the array with all test methods.
@@ -53,18 +53,58 @@ public class CoverageResults implements CoverageData {
     // Add the class and test to the map.
     public void addClassAndTest(TestClass testClass, String className) {
         if (coverage.get(className) == null) {
-            HashMap<TestClass, Object[]> innerMap = new HashMap<TestClass,  Object[]>();
+            HashMap<TestClass, Object[]> innerMap = new HashMap<>();
             coverage.put(className, innerMap);
         }
         if (coverage.get(className).get(testClass) == null) {
             Object[] objectArray = new Object[3];
-            ArrayList<Line> lineArrayList = new ArrayList<Line>();
-            ArrayList<Branch> branchArrayList = new ArrayList<Branch>();
-            ArrayList<Condition> conditionArrayList = new ArrayList<Condition>();
+            ArrayList<Line> lineArrayList = new ArrayList<>();
+            ArrayList<Branch> branchArrayList = new ArrayList<>();
+            ArrayList<Condition> conditionArrayList = new ArrayList<>();
             objectArray[0] = lineArrayList;
             objectArray[1] = branchArrayList;
             objectArray[2] = conditionArrayList;
             coverage.get(className).put(testClass, objectArray);
         }
+    }
+
+    @Override
+    public Line getLine(int line) {
+        return null;
+    }
+
+    @Override
+    public Branch getBranch(Line line) {
+        return null;
+    }
+
+    @Override
+    public Condition getCondition(Line line, int condition) {
+        return null;
+    }
+
+    @Override
+    public TestClass getTestClass(String name) {
+        return null;
+    }
+
+    @Override
+    public boolean getLineCoverage(Line line) {
+        return false;
+    }
+
+    @Override
+    public boolean getBranchCoverage(Branch branch) {
+        return false;
+    }
+
+    @Override
+    public boolean getConditionCoverage(Condition condition) {
+        return false;
+    }
+
+    @Override
+    public boolean getTestClassCoverage(TestClass testClass) {
+        return false;
     }
 }
