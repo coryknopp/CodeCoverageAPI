@@ -4,10 +4,12 @@ import java.util.*;
 
 public class CoverageResults implements CoverageData {
 
-    // The data model is HashMap<String, HashMap<TestMethod, Object[]>> .
-    // The Object[] holds three array lists of Lines, Branches, and Conditions.
+    // The data model is HashMap<String, HashMap<TestMethod, ArrayList<Object>[]>> .
+    // The ArrayList<Object>[] holds three array lists of Lines, Branches, and Conditions.
     // The TestMethod is the test that hit those Lines, Branches and Conditions.
+    // private HashMap<String, HashMap<String, ArrayList<Object>[]>> coverage;
     private HashMap<String, HashMap<String, Object[]>> coverage;
+    // private HashMap<String, ClassData> coverage;
     private ArrayList<String> allTests = new ArrayList<>();
 
     public CoverageResults() {
@@ -80,7 +82,15 @@ public class CoverageResults implements CoverageData {
         return null;
     }
 
-    public boolean getLineCoverage(Line line) {
+    public boolean getLineCoverage(int line, String className) {
+        /*ArrayList<Object> lineList = coverage.get(className).get("Temporary test")[0];
+        for (Object obj : lineList) {
+            Line l = (Line) obj;
+            if (line == l.getLineNumber()) {
+                return true;
+            }
+        }
+        return false;*/
         return false;
     }
 

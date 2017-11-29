@@ -6,7 +6,7 @@ import data_model.Line;
 
 public interface ResultsAnalyzer {
 
-    boolean isLineCovered(Line line);
+    boolean isLineCovered(int line);
     boolean isBranchCovered(Branch branch);
     boolean isConditionCovered(Condition condition);
     int lineCoveredCount(Line line);
