@@ -66,6 +66,11 @@ public class CoverageResults implements CoverageData {
         }
     }
 
+    public HashMap<String, HashMap<String, Object[]>> getCoverageData() {
+        return coverage;
+    }
+
+
     public Line getLine(String className, int lineNumber) {
        // Verify that there is class information for this class in the model.
        HashMap<String, Object[]> classCoverage;
