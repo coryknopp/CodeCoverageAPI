@@ -13,33 +13,36 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
         this.projectData = coverage.getProjectData();
     }
 
-    // This should probably be something more like isLineCovered(String className, int lineNumber)
-    @Override
     public boolean isLineCovered(String className, int line) {
-        /*if(coverage.lineCoverage.get(line.className()).get(line.lineNumber()) == null)
-            return false;
-        else
-            return coverage.lineCoverage.get(line.className()).get(line.lineNumber());*/
-
-        TestData testData = projectData.get(className).getTestData();
-
-
-        return false;
+        boolean con = false;
+        if (lineCoveredCount(className, line) > 0) {
+            con = true;
+        }
+        return con;
     }
 
-    @Override
-    public boolean isBranchCovered(Branch branch) {
+    public boolean isBranchCovered(String className, int line) {
       return false;
     }
 
     @Override
-    public boolean isConditionCovered(Condition condition) {
+    public boolean isConditionCovered(String className, int line, int condition) {
         return false;
     }
 
     @Override
-    public int lineCoveredCount(Line line) {
-        return 0;
+    public int lineCoveredCount(String className, int line) {
+        HashMap<String, MethodData> methodData = projectData.getMethodData(className);
+        int count = 0 
+        for (MethodData method : methodData.values()) {
+            lines = method.getLines();
+            for (Line l : method.getLines) {
+                if (l.getLineNumber() == line) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     @Override
