@@ -4,7 +4,7 @@ import java.util.*;
 
 public class CoverageResults implements CoverageData {
 
-    private HashMap<String, ProjectData> coverage;
+    private HashMap<String, ProjectData> projectData;
 
     public CoverageResults() {
         coverage = new HashMap<>();
@@ -15,11 +15,11 @@ public class CoverageResults implements CoverageData {
     }
 
     public HashMap<String, ProjectData> getProjectData() {
-        return coverage;
+        return projectData;
     }
 
     public HashMap<String, MethodData> getMethodData(String projectClass) {
-        return coverage.getValue(projectClass);
+        return projectData.get(projectClass).getMethodData();
     }
     
 }
