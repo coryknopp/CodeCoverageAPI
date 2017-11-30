@@ -1,5 +1,7 @@
 package analyzer;
 
+import java.util.*;
+
 import data_model.*;
 import formatter.ResultsAnalyzer;
 
@@ -31,15 +33,15 @@ public class CoverageAnalyzer {
     }
 
     public int lineCoveredCount(String className, int line) {
-        HashMap<String, MethodData> methodData = coverage.getMethodData(className);
+        // HashMap<String, MethodData> methodData = coverage.getMethodData(className);
         int count = 0;
-        for (MethodData method : methodData.values()) {
-            for (Line l : method.getLines()) {
-                if (l.getLineNumber() == line) {
-                    count++;
-                }
-            }
-        }
+        // for (MethodData method : methodData.values()) {
+        //     for (Line l : method.getLines()) {
+        //         if (l.getLineNumber() == line) {
+        //             count++;
+        //         }
+        //     }
+        // }
         return count;
     }
 
