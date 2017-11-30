@@ -66,17 +66,82 @@ public class CoverageResults implements CoverageData {
         }
     }
 
-    public Line getLine(int line) {
-        return null;
-    }
+    public Line getLine(String className, int lineNumber) {
+       // Verify that there is class information for this class in the model.
+       HashMap<String, Object[]> classCoverage;
+       if (coverage.get(className) == null) {
+         return null;
+       }
+       else {
+         classCoverage = coverage.get(className);
+       }
 
-    public Branch getBranch(int line) {
-        return null;
-    }
+       // For each test of this class check which lines are covered by
+       // the test. Return the line if it matches the line number you
+       // are searching for.
+       for (String test: classCoverage.keySet()) {
+         ArrayList<Line> lines = ((ArrayList<Line>) classCoverage.get(test)[0]);
+         for(Line line: lines) {
+           if (line.getLineNumber() == lineNumber)
+             return line;
+         }
+       }
 
-    public Condition getCondition(int line, int condition) {
-        return null;
-    }
+       // No line matched this class and line number.
+       return null;
+   }
+
+
+   public Branch getBranch(String className, int lineNumber) {
+     // Verify that there is class information for this class in the model.
+     HashMap<String, Object[]> classCoverage;
+     if (coverage.get(className) == null) {
+       return null;
+     }
+     else {
+       classCoverage = coverage.get(className);
+     }
+
+     // For each test of this class check which branches are covered by
+     // the test. Return the branch if it matches the line number you
+     // are searching for.
+     for (String test: classCoverage.keySet()) {
+       ArrayList<Branch> branches = ((ArrayList<Branch>) classCoverage.get(test)[1]);
+       for(Branch branch: branches) {
+         if (branch.getLine().getLineNumber() == lineNumber)
+           return branch;
+       }
+     }
+
+     // No branch matched this class and line number.
+     return null;
+   }
+
+   public Condition getCondition(String className, int lineNumber, int index) {
+     // Verify that there is class information for this class in the model.
+     HashMap<String, Object[]> classCoverage;
+     if (coverage.get(className) == null) {
+      return null;
+     }
+     else {
+       classCoverage = coverage.get(className);
+     }
+
+     // For each test of this class check which branches are covered by
+     // the test. Return the line if it matches the line number you
+     // are searching for.
+     for (String test: classCoverage.keySet()) {
+       ArrayList<Condition> conditions = ((ArrayList<Condition>)classCoverage.get(test)[2]);
+       for(Condition condition: conditions) {
+         if (condition.getBranch().getLine().getLineNumber() == lineNumber &&
+                 condition.getIndex() == index)
+           return condition;
+       }
+     }
+
+     // No condition matched this class and line number.
+     return null;
+   }
 
     public String getTestClass(String name) {
         return null;
