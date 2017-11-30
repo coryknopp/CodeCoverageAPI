@@ -3,120 +3,128 @@ package analyzer;
 import data_model.*;
 import formatter.ResultsAnalyzer;
 
-public class CoverageAnalyzer implements ResultsAnalyzer {
+public class CoverageAnalyzer {
 
     private CoverageResults coverage;
 
     public CoverageAnalyzer(CoverageResults coverage) {
         this.coverage = coverage;
     }
-
-    // This should probably be something more like isLineCovered(String className, int lineNumber)
-    @Override
-    public boolean isLineCovered(int line) {
-        /*if(coverage.lineCoverage.get(line.className()).get(line.lineNumber()) == null)
+ 
+    public boolean isLineCovered(String className, int line) {
+        if (coverage.getLine(className, line) == null) {
             return false;
-        else
-            return coverage.lineCoverage.get(line.className()).get(line.lineNumber());*/
-        return false;
+        }
+        else {
+            return true;
+        }
     }
 
-    @Override
-    public boolean isBranchCovered(Branch branch) {
-      return false;
+    public boolean isBranchCovered(String className, int line) {
+        if (coverage.getBranch(className, line) == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
-    @Override
-    public boolean isConditionCovered(Condition condition) {
-        return false;
+    public boolean isConditionCovered(String className, int line, int condition) {
+        if (coverage.getCondition(className, line, condition) == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
-    @Override
-    public int lineCoveredCount(Line line) {
+
+
+    public int lineCoveredCount(String className, int line) {
         return 0;
     }
 
-    @Override
-    public int branchCoveredCount(Branch branch) {
+
+    public int branchCoveredCount(String className, int line) {
         return 0;
     }
 
-    @Override
-    public int conditionCoveredCount(Condition condition) {
+
+    public int conditionCoveredCount(String className, int line, int condition) {
         return 0;
     }
 
-    @Override
+
     public int totalLines() {
         return 0;
     }
 
-    @Override
+
     public int totalBranches() {
         return 0;
     }
 
-    @Override
+
     public int totalConditions() {
         return 0;
     }
 
-    @Override
+
     public int totalLinesCovered() {
         return 0;
     }
 
-    @Override
+
     public int totalBranchesCovered() {
         return 0;
     }
 
-    @Override
+
     public int totalConditionsCovered() {
         return 0;
     }
 
-    @Override
+
     public int linesInMethod(String y) {
         return 0;
     }
 
-    @Override
+
     public int branchesInMethod(String y) {
         return 0;
     }
 
-    @Override
+
     public int conditionsInMethod(String y) {
         return 0;
     }
 
-    @Override
+
     public int linesCoveredInMethodCount(String y) {
         return 0;
     }
 
-    @Override
+
     public int branchesCoveredInMethodCount(String y) {
         return 0;
     }
 
-    @Override
+
     public int conditionsCoveredInMethodCount(String y) {
         return 0;
     }
 
-    @Override
+
     public int[] linesCoveredByTest(Class<?> z) {
         return new int[0];
     }
 
-    @Override
+
     public int[] branchesCoveredByTest(Class<?> z) {
         return new int[0];
     }
 
-    @Override
+
     public int[] conditionsCoveredByTest(Class<?> z) {
         return new int[0];
     }
