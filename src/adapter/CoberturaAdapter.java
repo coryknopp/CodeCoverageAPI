@@ -80,6 +80,22 @@ public class CoberturaAdapter implements CoverageAdapter {
         // iterate over class lines, if initializes method, create new method
         for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
 
+            
+            String s = c.toString().split("@")[1];
+            Integer i = Integer.parseInt(s, 16);
+            LineData lineData = classData.getLineData(i);
+            // Make a Line object and add it to the data model.
+            Line line = new Line(lineData.getLineNumber());
+            projectData.addMethodData(line)
+
+            // If the line is a branch, make a Branch object and add it to the data model.
+            if (lineData.hasBranch()) {
+
+            }
+
         }
+
     }
+
+
 }
