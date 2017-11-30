@@ -43,8 +43,6 @@ public class CoverageAnalyzer {
         }
     }
 
-
-
     public int lineCoveredCount(String className, int lineNumber) {
         int count = 0;
         // Verify that there is class information for this class in the model.
@@ -58,7 +56,7 @@ public class CoverageAnalyzer {
        // For each test of this className check all lines
         for (String test: classCoverage.keySet()) {
             ArrayList<Line> lines = ((ArrayList<Line>) classCoverage.get(test)[0]);
-            for(Line line: lines) {
+            for (Line line: lines) {
                 if (line.getLineNumber() == lineNumber)
                     count++;
                 }
@@ -66,9 +64,24 @@ public class CoverageAnalyzer {
        return count;
     }
 
-
-    public int branchCoveredCount(String className, int line) {
-        return 0;
+    public int branchCoveredCount(String className, int lineNumber) {
+        int count = 0;
+        HashMap<String, Object[]> classCoverage;
+        if (coverageData.get(className) == null) {
+            return 0;
+        }
+        else {
+            classCoverage = coverageData.get(className);
+        }
+        for (String test: classCoverage.keySet()) {
+            ArrayList<Branch> branches = (ArrayList<Branch>)classCoverage.get(test)[1];
+            for (Branch branch: branches) {
+                if (branch.getLine().getLineNumber() == lineNumber) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
 
