@@ -6,18 +6,24 @@ import formatter.ResultsAnalyzer;
 public class CoverageAnalyzer implements ResultsAnalyzer {
 
     private CoverageResults coverage;
+    private HashMap<String, ProjectData> projectData; 
 
     public CoverageAnalyzer(CoverageResults coverage) {
         this.coverage = coverage;
+        this.projectData = coverage.getProjectData();
     }
 
     // This should probably be something more like isLineCovered(String className, int lineNumber)
     @Override
-    public boolean isLineCovered(int line) {
+    public boolean isLineCovered(String className, int line) {
         /*if(coverage.lineCoverage.get(line.className()).get(line.lineNumber()) == null)
             return false;
         else
             return coverage.lineCoverage.get(line.className()).get(line.lineNumber());*/
+
+        TestData testData = projectData.get(className).getTestData();
+
+
         return false;
     }
 
