@@ -84,9 +84,26 @@ public class CoverageAnalyzer {
         return count;
     }
 
-
-    public int conditionCoveredCount(String className, int line, int condition) {
-        return 0;
+    public int conditionCoveredCount(String className, int lineNumber, int conditionIndex) {
+        int count = 0;
+        HashMap<String, Object[]> classCoverage;
+        if (coverageData.get(className) == null) {
+            return 0;
+        }
+        else {
+            classCoverage = coverageData.get(className);
+        }
+        for (String test: classCoverage.keySet()) {
+            ArrayList<Condition> conditions = (ArrayList<Condition>)classCoverage.get(test)[2];
+            for (Condition condition: conditions) {
+                boolean con1 = condition.getLine().getLineNumber() == lineNumber;
+                boolean con2 = condition.getIndex() == conditionIndex;
+                if (con1 && con2) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
 
