@@ -24,26 +24,35 @@ public class CoverageAnalyzer {
     }
 
     public boolean isBranchCovered(String className, int line) {
-      return false;
+        boolean con = false;
+        if (branchCoveredCount(className, line) > 0) {
+            con = true;
+        }
+        return con;
     }
-
 
     public boolean isConditionCovered(String className, int line, int condition) {
-        return false;
+        boolean con = false;
+        if (conditionCoveredCount(className, line) > 0) {
+            con = true;
+        }
+        return con;
     }
 
+
     public int lineCoveredCount(String className, int line) {
-        // HashMap<String, MethodData> methodData = coverage.getMethodData(className);
+        HashMap<String, MethodData> methodData = coverage.getMethodData(className);
         int count = 0;
-        // for (MethodData method : methodData.values()) {
-        //     for (Line l : method.getLines()) {
-        //         if (l.getLineNumber() == line) {
-        //             count++;
-        //         }
-        //     }
-        // }
+        for (MethodData method : methodData.values()) {
+            for (Line l : method.getLines()) {
+                if (l.getLineNumber() == line) {
+                    count++;
+                }
+            }
+        }
         return count;
     }
+
 
 
     public int branchCoveredCount(Branch branch) {
