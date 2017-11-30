@@ -1,14 +1,19 @@
 package analyzer;
 
+import java.util.*;
+
 import data_model.*;
 import formatter.ResultsAnalyzer;
+
 
 public class CoverageAnalyzer {
 
     private CoverageResults coverage;
+    private HashMap<String, HashMap<String, Object[]>> coverageData;
 
     public CoverageAnalyzer(CoverageResults coverage) {
         this.coverage = coverage;
+        this.coverageData = coverage.getCoverageData();
     }
  
     public boolean isLineCovered(String className, int line) {
@@ -40,8 +45,25 @@ public class CoverageAnalyzer {
 
 
 
-    public int lineCoveredCount(String className, int line) {
-        return 0;
+    public int lineCoveredCount(String className, int lineNumber) {
+        int count = 0;
+        // Verify that there is class information for this class in the model.
+       HashMap<String, Object[]> classCoverage;
+       if (coverageData.get(className) == null) {
+         return 0;
+       }
+       else {
+         classCoverage = coverageData.get(className);
+       }
+       // For each test of this className check all lines
+        for (String test: classCoverage.keySet()) {
+            ArrayList<Line> lines = ((ArrayList<Line>) classCoverage.get(test)[0]);
+            for(Line line: lines) {
+                if (line.getLineNumber() == lineNumber)
+                    count++;
+                }
+       }
+       return count;
     }
 
 
