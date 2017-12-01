@@ -117,7 +117,7 @@ public class CoverageAnalyzer {
     }
 
 
-    public int totalConditions() {
+    public int totalConditions(String className) {
         return 0;
     }
 
@@ -151,57 +151,48 @@ public class CoverageAnalyzer {
     }
 
 
-    public int totalBranchesCovered() {
+    public int totalBranchesCovered(String className) {
         return 0;
     }
 
-
-    public int totalConditionsCovered() {
+    public int totalConditionsCovered(String className) {
         return 0;
     }
 
-
-    public int linesInMethod(String y) {
+    public int linesInMethod(String className, String methodName) {
         return 0;
     }
 
-
-    public int branchesInMethod(String y) {
+    public int branchesInMethod(String className, String methodName) {
         return 0;
     }
 
-
-    public int conditionsInMethod(String y) {
+    public int conditionsInMethod(String className, String methodName) {
         return 0;
     }
 
-
-    public int linesCoveredInMethodCount(String y) {
+    public int linesCoveredInMethodCount(String className, String methodName) {
         return 0;
     }
 
-
-    public int branchesCoveredInMethodCount() {
+    public int branchesCoveredInMethodCount(String className, String methodName) {
         return 0;
     }
 
-
-    public int conditionsCoveredInMethodCount() {
+    public int conditionsCoveredInMethodCount(String className, String methodName) {
         return 0;
     }
 
-
-    public int[] linesCoveredByTest() {
+    public int[] linesCoveredByTest(String className, String testName) {
         return new int[0];
     }
 
-
-    public int[] branchesCoveredByTest() {
+    public int[] branchesCoveredByTest(String className, String testName) {
         return new int[0];
     }
 
-
-    public int[] conditionsCoveredByTest() {
+    public int[] conditionsCoveredByTest(String className, String testName) {
         return new int[0];
     }
+
 }
