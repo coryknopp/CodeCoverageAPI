@@ -107,12 +107,12 @@ public class CoverageAnalyzer {
     }
 
 
-    public int totalLines() {
+    public int totalLines(String className) {
         return 0;
     }
 
 
-    public int totalBranches() {
+    public int totalBranches(String className) {
         return 0;
     }
 
@@ -122,8 +122,32 @@ public class CoverageAnalyzer {
     }
 
 
-    public int totalLinesCovered() {
-        return 0;
+    public int totalLinesCovered(String className) {
+        int count = 0;
+        HashMap<String, Object[]> classCoverage;
+        if (coverageData.get(className) == null) {
+            return 0;
+        }
+        else {
+            classCoverage = coverageData.get(className);
+        }
+        for (String test: classCoverage.keySet()) {   
+            ArrayList<Line> lines = ((ArrayList<Line>) classCoverage.get(test)[0]);
+            ArrayList<Line> added = new ArrayList<Line>();         
+            for (Line line: lines) {
+                boolean found = false;
+                for(Line addedLine: added) {
+                    if (addedLine.getLineNumber() == line.getLineNumber()) {
+                        found = true;
+                    }
+                }   
+                if (!found) {
+                    added.add(line);
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
 
@@ -157,27 +181,27 @@ public class CoverageAnalyzer {
     }
 
 
-    public int branchesCoveredInMethodCount(String y) {
+    public int branchesCoveredInMethodCount() {
         return 0;
     }
 
 
-    public int conditionsCoveredInMethodCount(String y) {
+    public int conditionsCoveredInMethodCount() {
         return 0;
     }
 
 
-    public int[] linesCoveredByTest(Class<?> z) {
+    public int[] linesCoveredByTest() {
         return new int[0];
     }
 
 
-    public int[] branchesCoveredByTest(Class<?> z) {
+    public int[] branchesCoveredByTest() {
         return new int[0];
     }
 
 
-    public int[] conditionsCoveredByTest(Class<?> z) {
+    public int[] conditionsCoveredByTest() {
         return new int[0];
     }
 }
