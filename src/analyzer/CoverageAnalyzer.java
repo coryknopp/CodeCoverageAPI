@@ -1,18 +1,23 @@
 package analyzer;
 
 import java.util.*;
-
 import data_model.*;
 import formatter.ResultsAnalyzer;
-
+import adapter.CoberturaAdapter;
 
 public class CoverageAnalyzer {
 
     private CoverageResults coverage;
     private HashMap<String, HashMap<String, Object[]>> coverageData;
 
-    public CoverageAnalyzer(CoverageResults coverage) {
-        this.coverage = coverage;
+    // public CoverageAnalyzer(CoverageResults coverage) {
+    //     this.coverage = coverage;
+    //     this.coverageData = coverage.getCoverageData();
+    // }
+
+    public CoverageAnalyzer(String serFilepath) {
+        CoberturaAdapter adapter = new CoberturaAdapter(serFilepath);
+        this.coverage = adapter.getCoverageResults();
         this.coverageData = coverage.getCoverageData();
     }
  
