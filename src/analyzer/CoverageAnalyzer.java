@@ -5,7 +5,7 @@ import data_model.*;
 import formatter.ResultsAnalyzer;
 import adapter.CoberturaAdapter;
 
-public class CoverageAnalyzer {
+public class CoverageAnalyzer implements Analyzer {
 
     private CoverageResults coverage;
     private HashMap<String, HashMap<String, Object[]>> coverageData;
@@ -111,22 +111,6 @@ public class CoverageAnalyzer {
         return count;
     }
 
-
-    public int totalLines(String className) {
-        return 0;
-    }
-
-
-    public int totalBranches(String className) {
-        return 0;
-    }
-
-
-    public int totalConditions(String className) {
-        return 0;
-    }
-
-
     public int totalLinesCovered(String className) {
         int count = 0;
         HashMap<String, Object[]> classCoverage;
@@ -155,14 +139,82 @@ public class CoverageAnalyzer {
         return count;
     }
 
-
     public int totalBranchesCovered(String className) {
-        return 0;
+        int count = 0;
+        HashMap<String, Object[]> classCoverage;
+        if (coverageData.get(className) == null) {
+            return 0;
+        }
+        else {
+            classCoverage = coverageData.get(className);
+        }
+        for (String test: classCoverage.keySet()) {   
+            ArrayList<Branch> branches = ((ArrayList<Branch>) classCoverage.get(test)[1]);
+            ArrayList<Branch> added = new ArrayList<Branch>();         
+            for (Branch branch: branches) {
+                boolean found = false;
+                for(Branch addedBranch: added) {
+                    if (addedBranch.getLine().getLineNumber() == branch.getLine().getLineNumber()) {
+                        found = true;
+                    }
+                }   
+                if (!found) {
+                    added.add(branch);
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public int totalConditionsCovered(String className) {
+        int count = 0;
+        HashMap<String, Object[]> classCoverage;
+        if (coverageData.get(className) == null) {
+            return 0;
+        }
+        else {
+            classCoverage = coverageData.get(className);
+        }
+        for (String test: classCoverage.keySet()) {   
+            ArrayList<Condition> conditions = ((ArrayList<Condition>) classCoverage.get(test)[1]);
+            ArrayList<Condition> added = new ArrayList<Condition>();         
+            for (Condition condition : conditions) {
+                boolean found = false;
+                for(Condition addedCondition: added) {
+                    boolean con1 = addedCondition.getLine().getLineNumber() == condition.getLine().getLineNumber();
+                    boolean con2 = addedCondition.getIndex() == condition.getIndex();
+                    if (con1 && con2) {
+                        found = true;
+                    }
+                }   
+                if (!found) {
+                    added.add(condition);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+
+
+    public int totalLines(String className) {
         return 0;
     }
+
+
+    public int totalBranches(String className) {
+        return 0;
+    }
+
+
+    public int totalConditions(String className) {
+        return 0;
+    }
+
+
 
     public int linesInMethod(String className, String methodName) {
         return 0;
