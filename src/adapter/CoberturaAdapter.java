@@ -77,18 +77,31 @@ public class CoberturaAdapter implements CoverageAdapter {
     private void addClassData(ClassData classData) {
         allClasses.add(classData);
         ProjectData projectData = new ProjectData(classData.getName());
-        int lineNumber = classData.getLines().size();
+        int numberOfLines = classData.getLines().size();
         MethodData method = null;
-        for (int l = 1; l <= lineNumber; l++) {
-            LineData lineData = classData.getLineData(l);
-            if (lineData != null && lineData.isCovered()) {
-                Line line = new Line(l);
-                if (method == null || !method.getName().equals(lineData.getMethodName())) {
-                    if (method != null) {
-                        projectData.addMethodData(method);
-                    }
-                    method = new MethodData(lineData.getMethodName());
-                }
+        int linesFound = 0;
+        int lineNumber = 0;
+        while (linesFound != numberOfLines) {
+            lineNumber++;
+            LineData lineData = classData.getLineData(lineNumber);
+            if(lineData != null) {
+              linesFound++;
+              Line line;
+              if (lineData.isCovered()) {
+                 System.out.println(lineData.getLineNumber());
+                 line = new Line(lineNumber, true);
+              }
+              else {
+                 line = new Line(lineNumber, false);
+              }
+
+              if (method == null || !method.getName().equals(lineData.getMethodName())) {
+                  if (method != null) {
+                      projectData.addMethodData(method);
+                  }
+                  method = new MethodData(lineData.getMethodName());
+
+                System.out.println(method.getName());
                 method.addLine(line);
                 if (lineData.hasBranch()) {
                     Branch branch = new Branch(line);
@@ -99,6 +112,7 @@ public class CoberturaAdapter implements CoverageAdapter {
                     }
                 }
             }
+          }
         }
     }
 }
