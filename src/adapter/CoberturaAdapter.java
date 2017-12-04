@@ -94,6 +94,7 @@ public class CoberturaAdapter implements CoverageAdapter {
                  line = new Line(lineNumber, false);
               }
               method = new MethodData(lineData.getMethodName());
+              System.out.println(lineData.getMethodName());
               method.addLine(line);
               if (lineData.hasBranch()) {
                   Branch branch = new Branch(line);

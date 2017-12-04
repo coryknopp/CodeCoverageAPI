@@ -264,7 +264,7 @@ public class CoverageAnalyzer {
 
       int count = 0;
       for(MethodData method: methods.values()) {
-        if(method.getName() == methodName) {
+        if(method.getName().equals(methodName)) {
           for(Line line: method.getLines()) {
               count++;
           }
@@ -283,7 +283,7 @@ public class CoverageAnalyzer {
 
       int count = 0;
       for(MethodData method: methods.values()) {
-        if(method.getName() == methodName) {
+        if(method.getName().equals(methodName)) {
           for(Branch branch: method.getBranches()) {
               count++;
           }
@@ -302,7 +302,7 @@ public class CoverageAnalyzer {
 
       int count = 0;
       for(MethodData method: methods.values()) {
-        if(method.getName() == methodName) {
+        if(method.getName().equals(methodName)) {
           for(Condition condition: method.getConditions()) {
               count++;
           }
@@ -321,7 +321,7 @@ public class CoverageAnalyzer {
 
       int count = 0;
       for(MethodData method: methods.values()) {
-        if(method.getName() == methodName) {
+        if(method.getName().equals(methodName)) {
           for(Line line: method.getLines()) {
             if(line.isCovered())
               count++;
@@ -341,7 +341,7 @@ public class CoverageAnalyzer {
 
       int count = 0;
       for(MethodData method: methods.values()) {
-        if(method.getName() == methodName) {
+        if(method.getName().equals(methodName)) {
           for(Branch branch: method.getBranches()) {
             if(branch.getLine().isCovered())
               count++;
@@ -361,7 +361,7 @@ public class CoverageAnalyzer {
 
       int count = 0;
       for(MethodData method: methods.values()) {
-        if(method.getName() == methodName) {
+        if(method.getName().equals(methodName)) {
           for(Condition condition: method.getConditions()) {
             if(condition.getBranch().getLine().isCovered())
               count++;
