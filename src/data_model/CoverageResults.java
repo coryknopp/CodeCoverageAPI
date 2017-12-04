@@ -39,12 +39,12 @@ public class CoverageResults implements CoverageData {
 
     }
 
-    public HashMap<String, ProjectData> getProjectData() {
-        return coverage;
+    public ProjectData get(String className) {
+        return coverage.get(className);
     }
 
     public HashMap<String, MethodData> getMethodData(String projectClass) {
         return coverage.get(projectClass).getMethodData();
     }
-    
+
 }
