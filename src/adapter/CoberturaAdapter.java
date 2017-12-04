@@ -93,9 +93,7 @@ public class CoberturaAdapter implements CoverageAdapter {
               else {
                  line = new Line(lineNumber, false);
               }
-
               method = new MethodData(lineData.getMethodName());
-              System.out.println(method.getName());
               method.addLine(line);
               if (lineData.hasBranch()) {
                   Branch branch = new Branch(line);
@@ -106,11 +104,10 @@ public class CoberturaAdapter implements CoverageAdapter {
                   }
               }
 
-              if (method == null || !method.getName().equals(lineData.getMethodName())) {
-                if (method != null) {
-                    projectData.addMethodData(method);
-                }
+              if (method != null) {
+                  projectData.addMethodData(method);
               }
+
             }
           }
           coverage.addProjectData(projectData);

@@ -9,7 +9,7 @@ public class CoverageResults implements CoverageData {
     // private ArrayList<TestClass> allTests = new ArrayList<TestClass>();
 
     public CoverageResults() {
-        coverage = new HashMap<>();
+        coverage = new HashMap<String, ProjectData>();
 
         // allTests = new ArrayList<TestClass>();
     }
@@ -45,6 +45,10 @@ public class CoverageResults implements CoverageData {
 
     public HashMap<String, MethodData> getMethodData(String projectClass) {
         return coverage.get(projectClass).getMethodData();
+    }
+
+    public HashMap<String, ProjectData> getCoverage() {
+      return coverage;
     }
 
 }

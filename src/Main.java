@@ -2,6 +2,7 @@ import adapter.CoberturaAdapter;
 import analyzer.CoverageAnalyzer;
 import data_model.CoverageResults;
 import formatter.CSVFormatter;
+import data_model.*;
 
 public class Main {
 
@@ -19,6 +20,11 @@ public class Main {
         CoverageResults coverage = adapter.getCoverageResults();
         // STEP 2: Analyze CoverageResults
         CoverageAnalyzer analyzer = new CoverageAnalyzer(coverage);
+        //System.out.println(analyzer.lineCoveredCount("triangle.Triangle"));
+        System.out.println("Total lines in triangle " + analyzer.lineCount("triangle.Triangle"));
+        System.out.println("Lines covered in triangle " + analyzer.lineCoveredCount("triangle.Triangle"));
+        System.out.println("Line 15 Covered? " + analyzer.isLineCovered("triangle.Triangle", 15));
+        System.out.println("Lines in classify " + analyzer.linesInMethod("triangle.Triangle", "classify"));
         // STEP 3: Build simple CoverageResults visualizer
         CSVFormatter.drawOutput(analyzer);
     }
