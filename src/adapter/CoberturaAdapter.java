@@ -88,31 +88,31 @@ public class CoberturaAdapter implements CoverageAdapter {
               linesFound++;
               Line line;
               if (lineData.isCovered()) {
-                 System.out.println(lineData.getLineNumber());
                  line = new Line(lineNumber, true);
               }
               else {
                  line = new Line(lineNumber, false);
               }
 
-              if (method == null || !method.getName().equals(lineData.getMethodName())) {
-                  if (method != null) {
-                      projectData.addMethodData(method);
+              method = new MethodData(lineData.getMethodName());
+              System.out.println(method.getName());
+              method.addLine(line);
+              if (lineData.hasBranch()) {
+                  Branch branch = new Branch(line);
+                  method.addBranch(branch);
+                  for (int i = 0; i < lineData.getConditionSize(); i++) {
+                      Condition condition = new Condition(line, branch, i);
+                      method.addCondition(condition);
                   }
-                  method = new MethodData(lineData.getMethodName());
+              }
 
-                System.out.println(method.getName());
-                method.addLine(line);
-                if (lineData.hasBranch()) {
-                    Branch branch = new Branch(line);
-                    method.addBranch(branch);
-                    for (int i = 0; i < lineData.getConditionSize(); i++) {
-                        Condition condition = new Condition(line, branch, i);
-                        method.addCondition(condition);
-                    }
+              if (method == null || !method.getName().equals(lineData.getMethodName())) {
+                if (method != null) {
+                    projectData.addMethodData(method);
                 }
+              }
             }
           }
-        }
+          coverage.addProjectData(projectData);
     }
 }
