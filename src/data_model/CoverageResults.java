@@ -39,9 +39,6 @@ public class CoverageResults implements CoverageData {
 
     }
 
-
-
-
     public HashMap<String, ProjectData> getProjectData() {
         return coverage;
     }

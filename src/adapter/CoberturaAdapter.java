@@ -39,14 +39,14 @@ public class CoberturaAdapter implements CoverageAdapter {
         return coverage;
     }
 
-    private void addClassData(ClassData classData) {
+    /*private void _addClassData(ClassData classData) {
         // Add this class to the array list holding all class data.
         allClasses.add(classData);
         // Get the class name of this class.
         String className = classData.getName();
         // This is a placeholder.
         String testName = "Tempory test";
-        coverage.addTestMethod(testName);
+        coverage.addMethod(testName);
         // For each line in the class:
         for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
             // CoverageData does not have a getLineNumber method. However, c.toString()
@@ -72,30 +72,33 @@ public class CoberturaAdapter implements CoverageAdapter {
                 }
             }
         }
+    }*/
+
+    private void addClassData(ClassData classData) {
+        allClasses.add(classData);
+        ProjectData projectData = new ProjectData(classData.getName());
+        int lineNumber = classData.getLines().size();
+        MethodData method = null;
+        for (int l = 1; l <= lineNumber; l++) {
+            LineData lineData = classData.getLineData(l);
+            if (lineData != null && lineData.isCovered()) {
+                Line line = new Line(l);
+                if (method == null || !method.getName().equals(lineData.getMethodName())) {
+                    if (method != null) {
+                        projectData.addMethodData(method);
+                    }
+                    method = new MethodData(lineData.getMethodName());
+                }
+                method.addLine(line);
+                if (lineData.hasBranch()) {
+                    Branch branch = new Branch(line);
+                    method.addBranch(branch);
+                    for (int i = 0; i < lineData.getConditionSize(); i++) {
+                        Condition condition = new Condition(line, branch, i);
+                        method.addCondition(condition);
+                    }
+                }
+            }
+        }
     }
-
-    // private void addClassData(ClassData classData) {
-    //     allClasses.add(classData);
-    //     ProjectData projectData = new ProjectData(classData.getName());
-    //     // iterate over class lines, if initializes method, create new method
-    //     for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
-
-            
-    //         String s = c.toString().split("@")[1];
-    //         Integer i = Integer.parseInt(s, 16);
-    //         LineData lineData = classData.getLineData(i);
-    //         // Make a Line object and add it to the data model.
-    //         Line line = new Line(lineData.getLineNumber());
-    //         projectData.addMethodData(line);
-
-    //         // If the line is a branch, make a Branch object and add it to the data model.
-    //         if (lineData.hasBranch()) {
-
-    //         }
-
-    //     }
-
-    // }
-
-
 }

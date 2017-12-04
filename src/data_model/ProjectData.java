@@ -9,6 +9,7 @@ public class ProjectData {
 
     public ProjectData(String name) {
     	this.name = name;
+    	data = new HashMap<>();
     }
 
     public void addMethodData(MethodData methodData) {
@@ -22,5 +23,4 @@ public class ProjectData {
     public HashMap<String, MethodData> getMethodData() {
     	return data;
     }
-
 }

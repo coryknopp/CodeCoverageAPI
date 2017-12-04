@@ -9,6 +9,7 @@ public class Main {
             //      int[] linesCoveredByTest(Class<?> z);
             //      int[] branchesCoveredByTest(Class<?> z);
             //      int[] conditionsCoveredByTest(Class<?> z);
+
     // 2. How should the API be used at the end? From within Java code as an object?
 
     public static void main(String[] args) {

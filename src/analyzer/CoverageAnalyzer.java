@@ -53,14 +53,12 @@ public class CoverageAnalyzer {
         return count;
     }
 
-
-
-    public int branchCoveredCount(Branch branch) {
+    public int branchCoveredCount(String className, int line) {
         return 0;
     }
 
 
-    public int conditionCoveredCount(Condition condition) {
+    public int conditionCoveredCount(String className, int line) {
         return 0;
     }
 
