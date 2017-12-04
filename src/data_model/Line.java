@@ -14,7 +14,7 @@ public class Line {
     return lineNumber;
   }
 
-  public boolean isLineCovered() {
+  public boolean isCovered() {
     return isCovered;
   }
 
