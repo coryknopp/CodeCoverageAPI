@@ -77,9 +77,9 @@ public class CoberturaAdapter implements CoverageAdapter {
     private void addClassData(ClassData classData) {
         allClasses.add(classData);
         ProjectData projectData = new ProjectData(classData.getName());
-        int lineNumber = classData.getLines().size();
         MethodData method = null;
-        for (int l = 1; l <= lineNumber; l++) {
+        for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
+            Integer l = Integer.parseInt(c.toString().split("@")[1], 16);
             LineData lineData = classData.getLineData(l);
             if (lineData != null && lineData.isCovered()) {
                 Line line = new Line(l);
