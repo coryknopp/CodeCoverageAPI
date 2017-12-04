@@ -82,7 +82,7 @@ public class CoberturaAdapter implements CoverageAdapter {
             Integer l = Integer.parseInt(c.toString().split("@")[1], 16);
             LineData lineData = classData.getLineData(l);
             if (lineData != null && lineData.isCovered()) {
-                Line line = new Line(l);
+                Line line = new Line(l, true);
                 if (method == null || !method.getName().equals(lineData.getMethodName())) {
                     if (method != null) {
                         projectData.addMethodData(method);
