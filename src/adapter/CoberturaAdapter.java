@@ -2,9 +2,7 @@ package adapter;
 
 import data_model.CoverageResults;
 import data_model.*;
-import net.sourceforge.cobertura.coveragedata.ClassData;
-import net.sourceforge.cobertura.coveragedata.CoverageDataFileHandler;
-import net.sourceforge.cobertura.coveragedata.LineData;
+import net.sourceforge.cobertura.coveragedata.*;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -13,30 +11,71 @@ public class CoberturaAdapter implements CoverageAdapter {
 
     private CoverageResults coverage;
     private String filepath;
-    private static ArrayList<ClassData> allClasses;
 
     public CoberturaAdapter(String filepath) {
         this.filepath = filepath;
         coverage = new CoverageResults();
-        allClasses = new ArrayList<>();
     }
 
     @Override
     public CoverageResults getCoverageResults() {
-        net.sourceforge.cobertura.coveragedata.ProjectData project = deserialize();
+        ProjectData project = CoverageDataFileHandler.loadCoverageData(new File(filepath));
         return parseData(project);
     }
 
-    private net.sourceforge.cobertura.coveragedata.ProjectData deserialize() {
-        return CoverageDataFileHandler.loadCoverageData(new File(filepath));
-    }
-
-    private CoverageResults parseData(net.sourceforge.cobertura.coveragedata.ProjectData project) {
+    private CoverageResults parseData(ProjectData project) {
         for (Object obj : project.getClasses()) {
             ClassData classData = (ClassData) obj;
-            addClassData(classData);
+            addClassCoverage(classData);
         }
         return coverage;
+    }
+
+    private void addClassCoverage(ClassData classData) {
+        ClassCoverage classCoverage = new ClassCoverage(classData.getName());
+        MethodCoverage method = null;
+        for (CoverageData c : classData.getLines()) {
+            Integer l = Integer.parseInt(c.toString().split("@")[1], 16);
+            LineData lineData = classData.getLineData(l);
+            Line line;
+            if (lineData != null) {
+                if (method == null) {
+                    method = new MethodCoverage(lineData.getMethodName());
+                } else if (!method.getName().equals(lineData.getMethodName())) {
+                    classCoverage.addMethodData(method);
+                    method = new MethodCoverage(lineData.getMethodName());
+                }
+                if (lineData.isCovered() || lineData.getNumberOfCoveredBranches() > 0) {
+                    line = new Line(l, true);
+                } else {
+                    line = new Line(l, false);
+                }
+                method.addLine(line);
+                if (lineData.hasBranch()) {
+                    Branch branch = new Branch(line);
+                    method.addBranch(branch);
+                    for (int i = 0; i < lineData.getConditionSize(); i++) {
+                        Condition condition = new Condition(line, branch, i);
+                        method.addCondition(condition);
+                    }
+                }
+            }
+        }
+        classCoverage.addMethodData(method);
+        coverage.addClassCoverage(classCoverage);
+        // Check that data is accurate
+        getCoberturaResults(classData);
+    }
+
+    private void getCoberturaResults(ClassData classData) {
+        if (classData.getName().equals("triangle.Triangle")) {
+            System.out.println("COBERTURA RESULTS:");
+            System.out.println("Total lines in triangle " + classData.getNumberOfValidLines());
+            System.out.println("Lines covered in triangle " + classData.getNumberOfCoveredLines());
+            System.out.println("Total branches in triangle " + classData.getNumberOfValidBranches());
+            System.out.println("Branches covered in triangle " + classData.getNumberOfCoveredBranches());
+            System.out.println("Line 21 Covered " + classData.getLineCoverage(21).isCovered());
+        }
     }
 
     /*private void _addClassData(ClassData classData) {
@@ -48,8 +87,8 @@ public class CoberturaAdapter implements CoverageAdapter {
         String testName = "Tempory test";
         coverage.addMethod(testName);
         // For each line in the class:
-        for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
-            // CoverageData does not have a getLineNumber method. However, c.toString()
+        for (net.sourceforge.cobertura.coveragedata.CoverageModel c : classData.getLines()) {
+            // CoverageModel does not have a getLineNumber method. However, c.toString()
             // prints 'net.sourceforge.cobertura.coveragedata.LineData@<hexLineNumber>'
             // To get the line number, we can split this string on '@' and then convert
             // the hex line number to decimal.
@@ -73,32 +112,4 @@ public class CoberturaAdapter implements CoverageAdapter {
             }
         }
     }*/
-
-    private void addClassData(ClassData classData) {
-        allClasses.add(classData);
-        ProjectData projectData = new ProjectData(classData.getName());
-        MethodData method = null;
-        for (net.sourceforge.cobertura.coveragedata.CoverageData c : classData.getLines()) {
-            Integer l = Integer.parseInt(c.toString().split("@")[1], 16);
-            LineData lineData = classData.getLineData(l);
-            if (lineData != null && lineData.isCovered()) {
-                Line line = new Line(l, true);
-                if (method == null || !method.getName().equals(lineData.getMethodName())) {
-                    if (method != null) {
-                        projectData.addMethodData(method);
-                    }
-                    method = new MethodData(lineData.getMethodName());
-                }
-                method.addLine(line);
-                if (lineData.hasBranch()) {
-                    Branch branch = new Branch(line);
-                    method.addBranch(branch);
-                    for (int i = 0; i < lineData.getConditionSize(); i++) {
-                        Condition condition = new Condition(line, branch, i);
-                        method.addCondition(condition);
-                    }
-                }
-            }
-        }
-    }
 }

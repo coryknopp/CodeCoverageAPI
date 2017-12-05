@@ -2,14 +2,14 @@ package data_model;
 
 import java.util.ArrayList;
 
-public class MethodData {
+public class MethodCoverage {
 
     private String name;
     private ArrayList<Line> lines;
     private ArrayList<Branch> branches;
     private ArrayList<Condition> conditions;
 
-    public MethodData(String name) {
+    public MethodCoverage(String name) {
         this.name = name;
         lines = new ArrayList<>();
         branches = new ArrayList<>();

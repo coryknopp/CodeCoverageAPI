@@ -20,7 +20,7 @@ public class Main {
         CoverageResults coverage = adapter.getCoverageResults();
         // STEP 2: Analyze CoverageResults
         CoverageAnalyzer analyzer = new CoverageAnalyzer(coverage);
-        //System.out.println(analyzer.lineCoveredCount("triangle.Triangle"));
+        System.out.println("OUR RESULTS:");
         System.out.println("Total lines in triangle " + analyzer.lineCount("triangle.Triangle"));
         System.out.println("Lines covered in triangle " + analyzer.lineCoveredCount("triangle.Triangle"));
         System.out.println("Total branches in triangle " + analyzer.branchCount("triangle.Triangle"));

@@ -2,22 +2,17 @@ package data_model;
 
 import java.util.*;
 
-public class CoverageResults implements CoverageData {
+public class CoverageResults implements CoverageModel {
 
-    private HashMap<String, ProjectData> coverage;
-
-    // private ArrayList<TestClass> allTests = new ArrayList<TestClass>();
+    private HashMap<String, ClassCoverage> coverage;
 
     public CoverageResults() {
-        coverage = new HashMap<String, ProjectData>();
-
-        // allTests = new ArrayList<TestClass>();
+        coverage = new HashMap<>();
     }
 
-    public void addProjectData(ProjectData projectData) {
-        coverage.put(projectData.getName(), projectData);
+    public void addClassCoverage(ClassCoverage classCoverage) {
+        coverage.put(classCoverage.getName(), classCoverage);
     }
-
 
     public void addTestMethod(String testClass) {
         // allTests.add(testClass);
@@ -39,15 +34,17 @@ public class CoverageResults implements CoverageData {
 
     }
 
-    public ProjectData get(String className) {
+    public ClassCoverage get(String className) {
         return coverage.get(className);
     }
 
-    public HashMap<String, MethodData> getMethodData(String projectClass) {
-        return coverage.get(projectClass).getMethodData();
+    public HashMap<String, MethodCoverage> getMethodCoverage(String projectClass) {
+        ClassCoverage cls = coverage.get(projectClass);
+        HashMap<String, MethodCoverage> method = cls.getMethodCoverage();
+        return method;
     }
 
-    public HashMap<String, ProjectData> getCoverage() {
+    public HashMap<String, ClassCoverage> getCoverage() {
       return coverage;
     }
 
