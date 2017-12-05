@@ -13,12 +13,24 @@ public class ProjectData {
     }
 
     public void addMethodData(MethodData methodData) {
-    	data.put(methodData.getName(), methodData);
+      if(data.get(methodData.getName()) == null)
+    	 data.put(methodData.getName(), methodData);
+      else {
+       MethodData method = data.get(methodData.getName());
+       for(Line line: methodData.getLines())
+          method.addLine(line);
+       for(Branch branch: methodData.getBranches())
+          method.addBranch(branch);
+       for(Condition condition: methodData.getConditions())
+          method.addCondition(condition);
+       data.put(methodData.getName(), method);
+      }
     }
 
     public String getName() {
     	return name;
     }
+
 
     public HashMap<String, MethodData> getMethodData() {
     	return data;
