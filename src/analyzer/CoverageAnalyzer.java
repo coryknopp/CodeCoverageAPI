@@ -33,7 +33,11 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                     }
                 }
             }
-            throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            if (lineNumber < totalLinesInClass(className)) {
+                return false;
+            } else {
+                throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            }
         }
     }
 
@@ -41,7 +45,6 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
         if (coverage.getMethodCoverage(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
-
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
             for (MethodCoverage method : methods.values()) {
                 for (Branch branch : method.getBranches()) {
