@@ -62,7 +62,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public boolean isConditionCovered(String className, int lineNumber, int conditionIndex) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
