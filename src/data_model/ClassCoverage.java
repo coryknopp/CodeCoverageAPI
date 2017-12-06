@@ -16,11 +16,11 @@ public class ClassCoverage {
         methods.put(methodCoverage.getName(), methodCoverage);
     }
 
-    String getName() {
+    public String getName() {
     	return name;
     }
 
-    HashMap<String, MethodCoverage> getMethodCoverage() {
+    public HashMap<String, MethodCoverage> getMethodCoverage() {
     	return methods;
     }
 }
