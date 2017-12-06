@@ -81,7 +81,7 @@ public class CoberturaAdapter implements CoverageAdapter {
         classCoverage.addMethodData(method);
         coverage.addClassCoverage(classCoverage);
         // Check that data is accurate
-        getCoberturaResults(classData);
+        //getCoberturaResults(classData);
     }
 
     private void getCoberturaResults(ClassData classData) {
