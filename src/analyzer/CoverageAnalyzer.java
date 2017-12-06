@@ -119,15 +119,12 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      HashMap<Integer, Boolean> branchesFound = new HashMap<Integer, Boolean>();
-      for(MethodCoverage method: methods.values()) {
+      for (MethodCoverage method: methods.values()) {
         for (Branch branch: method.getBranches()) {
-            if(branch.getLine().isCovered() && branchesFound.get(branch.getLine().getLineNumber()) == null) {
-              branchesFound.put(branch.getLine().getLineNumber(), true);
+            if (branch.isCovered()) {
               count++;
             }
         }
-
       }
       return count;
     }
@@ -141,15 +138,10 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      HashMap<Integer, Boolean> branchesFound = new HashMap<Integer, Boolean>();
-      for(MethodCoverage method: methods.values()) {
+      for (MethodCoverage method: methods.values()) {
         for (Branch branch: method.getBranches()) {
-            if(branchesFound.get(branch.getLine().getLineNumber()) == null) {
-              branchesFound.put(branch.getLine().getLineNumber(), true);
-              count++;
-            }
+            count++;
         }
-
       }
       return count;
     }
@@ -163,16 +155,12 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      HashMap<Integer, Boolean> conditionsFound = new HashMap<Integer, Boolean>();
-      for(MethodCoverage method: methods.values()) {
+      for (MethodCoverage method: methods.values()) {
         for (Condition condition: method.getConditions()) {
-            if(condition.getBranch().getLine().isCovered() &&
-                conditionsFound.get(condition.getBranch().getLine().getLineNumber()) == null) {
-              conditionsFound.put(condition.getBranch().getLine().getLineNumber(), true);
+            if (condition.getCoverageRate() > 0) {
               count++;
             }
         }
-
       }
       return count;
     }
@@ -186,15 +174,10 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      HashMap<Integer, Boolean> conditionsFound = new HashMap<Integer, Boolean>();
-      for(MethodCoverage method: methods.values()) {
+      for (MethodCoverage method: methods.values()) {
         for (Condition condition: method.getConditions()) {
-            if(conditionsFound.get(condition.getBranch().getLine().getLineNumber()) == null) {
-              conditionsFound.put(condition.getBranch().getLine().getLineNumber(), true);
-              count++;
-            }
+            count++;
         }
-
       }
       return count;
     }

@@ -51,13 +51,31 @@ public class CoberturaAdapter implements CoverageAdapter {
                     line = new Line(l, false);
                 }
                 method.addLine(line);
-                if (lineData.hasBranch()) {
-                    Branch branch = new Branch(line);
-                    method.addBranch(branch);
-                    for (int i = 0; i < lineData.getConditionSize(); i++) {
-                        Condition condition = new Condition(line, branch, i);
-                        method.addCondition(condition);
+                if (lineData.getNumberOfValidBranches() > 0) {
+                    int coveredBranches = lineData.getNumberOfCoveredBranches();
+                    int coveredBranchesCounted = 0;
+                    for (int i = 0; i < lineData.getNumberOfValidBranches(); i++) {
+                        Branch branch;
+                        if (coveredBranchesCounted < coveredBranches) {
+                            branch = new Branch(line, true);
+                            coveredBranchesCounted++;
+                        } else {
+                            branch = new Branch(line, false);
+                        }
+                        method.addBranch(branch);
                     }
+                }
+                int totalConditions = getConditionNumber(lineData);
+                for (int i = 0; i < totalConditions; i++) {
+                    Condition condition;
+                    JumpData jumpData = (JumpData) lineData.getConditionData(i);
+                    if (jumpData != null) {
+                        float coverageRate = (float) jumpData.getBranchCoverageRate();
+                        condition = new Condition(line, new Branch(line, true), i, coverageRate);
+                    } else {
+                        condition = new Condition(line, new Branch(line, false), i, 0);
+                    }
+                    method.addCondition(condition);
                 }
             }
         }
@@ -76,6 +94,16 @@ public class CoberturaAdapter implements CoverageAdapter {
             System.out.println("Branches covered in triangle " + classData.getNumberOfCoveredBranches());
             System.out.println("Line 21 Covered " + classData.getLineCoverage(21).isCovered());
         }
+    }
+
+    private int getConditionNumber(LineData lineData) {
+        int totalConditions = 0;
+        String condition = lineData.getConditionCoverage();
+        if (condition.contains("/")) {
+            String s = condition.split("/")[1].split("\\)")[0];
+            totalConditions = Integer.parseInt(s);
+        }
+        return totalConditions / 2;
     }
 
     /*private void _addClassData(ClassData classData) {
