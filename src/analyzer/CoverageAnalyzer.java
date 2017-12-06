@@ -4,7 +4,6 @@ import java.util.*;
 
 import adapter.CoberturaAdapter;
 import data_model.*;
-import formatter.ResultsAnalyzer;
 
 public class CoverageAnalyzer implements ResultsAnalyzer {
 
