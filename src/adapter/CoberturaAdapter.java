@@ -70,9 +70,9 @@ public class CoberturaAdapter implements CoverageAdapter {
                     Condition condition;
                     JumpData jumpData = (JumpData) lineData.getConditionData(i);
                     if (jumpData != null && jumpData.getBranchCoverageRate() > 0) {
-                        condition = new Condition(line, new Branch(line, true), i, true);
+                        condition = new Condition(line, i, true);
                     } else {
-                        condition = new Condition(line, new Branch(line, false), i, false);
+                        condition = new Condition(line, i, false);
                     }
                     method.addCondition(condition);
                 }

@@ -4,7 +4,6 @@ import java.util.*;
 
 import adapter.CoberturaAdapter;
 import data_model.*;
-import formatter.CSVFormatter;
 
 public class CoverageAnalyzer {
 
@@ -34,7 +33,6 @@ public class CoverageAnalyzer {
             return line.isCovered();
         }
       }
-
       return false;
     }
 
@@ -52,7 +50,6 @@ public class CoverageAnalyzer {
           }
         }
       }
-
       return false;
     }
 
@@ -63,15 +60,13 @@ public class CoverageAnalyzer {
       else
         methods = coverage.getMethodCoverage(className);
 
-      for(MethodCoverage method: methods.values()) {
-        for(Condition condition: method.getConditions()) {
-          if (condition.getBranch().getLine().getLineNumber() == lineNumber &&
-                condition.getIndex() == conditionIndex) {
-            return condition.getBranch().getLine().isCovered();
+      for (MethodCoverage method: methods.values()) {
+        for (Condition condition: method.getConditions()) {
+          if (condition.getLine().getLineNumber() == lineNumber && condition.getIndex() == conditionIndex) {
+            return condition.isCovered();
           }
         }
       }
-
       return false;
     }
 
@@ -191,7 +186,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int totalLines() {
       int count = 0;
       for(String s: coverage.getCoverage().keySet()) {
@@ -199,7 +193,6 @@ public class CoverageAnalyzer {
       }
       return count;
     }
-
 
     public int totalBranches() {
       int count = 0;
@@ -209,7 +202,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int totalConditions() {
       int count = 0;
       for(String s: coverage.getCoverage().keySet()) {
@@ -217,7 +209,6 @@ public class CoverageAnalyzer {
       }
       return count;
     }
-
 
     public int totalLinesCovered() {
       int count = 0;
@@ -227,7 +218,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int totalBranchesCovered() {
       int count = 0;
       for(String s: coverage.getCoverage().keySet()) {
@@ -236,7 +226,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int totalConditionsCovered() {
       int count = 0;
       for(String s: coverage.getCoverage().keySet()) {
@@ -244,7 +233,6 @@ public class CoverageAnalyzer {
       }
       return count;
     }
-
 
     public int linesInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
@@ -264,7 +252,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int branchesInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
@@ -283,7 +270,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int conditionsInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
@@ -301,7 +287,6 @@ public class CoverageAnalyzer {
       }
       return count;
     }
-
 
     public int linesCoveredInMethodCount(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
@@ -322,7 +307,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int branchesCoveredInMethodCount(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
@@ -342,7 +326,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-
     public int conditionsCoveredInMethodCount(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
@@ -351,10 +334,10 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      for(MethodCoverage method: methods.values()) {
-        if(method.getName().equals(methodName)) {
-          for(Condition condition: method.getConditions()) {
-            if(condition.getBranch().getLine().isCovered())
+      for (MethodCoverage method: methods.values()) {
+        if (method.getName().equals(methodName)) {
+          for (Condition condition: method.getConditions()) {
+            if (condition.isCovered())
               count++;
           }
         }
