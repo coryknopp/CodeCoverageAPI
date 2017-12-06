@@ -1,30 +1,26 @@
 package formatter;
 
-import data_model.Branch;
-import data_model.Condition;
-import data_model.Line;
-
 public interface ResultsAnalyzer {
 
-    boolean isLineCovered(int line);
-    boolean isBranchCovered(Branch branch);
-    boolean isConditionCovered(Condition condition);
-    int lineCoveredCount(Line line);
-    int branchCoveredCount(Branch branch);
-    int conditionCoveredCount(Condition condition);
+    boolean isLineCovered(String className, int lineNumber);
+    boolean isBranchCovered(String className, int lineNumber);
+    boolean isConditionCovered(String className, int lineNumber, int conditionIndex);
     int totalLines();
     int totalBranches();
     int totalConditions();
     int totalLinesCovered();
     int totalBranchesCovered();
     int totalConditionsCovered();
-    int linesInMethod(String y);
-    int branchesInMethod(String y);
-    int conditionsInMethod(String y);
-    int linesCoveredInMethodCount(String y);
-    int branchesCoveredInMethodCount(String y);
-    int conditionsCoveredInMethodCount(String y);
-    int[] linesCoveredByTest(Class<?> z);
-    int[] branchesCoveredByTest(Class<?> z);
-    int[] conditionsCoveredByTest(Class<?> z);
+    int linesCoveredInClass(String className);
+    int totalLinesInClass(String className);
+    int branchesCoveredInClass(String className);
+    int totalBranchesInClass(String className);
+    int conditionsCoveredInClass(String className);
+    int totalConditionsInClass(String className);
+    int linesInMethod(String className, String methodName);
+    int branchesInMethod(String className, String methodName);
+    int conditionsInMethod(String className, String methodName);
+    int linesCoveredInMethod(String className, String methodName);
+    int branchesCoveredInMethod(String className, String methodName);
+    int conditionsCoveredInMethod(String className, String methodName);
 }
