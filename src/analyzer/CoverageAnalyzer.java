@@ -4,8 +4,9 @@ import java.util.*;
 
 import adapter.CoberturaAdapter;
 import data_model.*;
+import formatter.ResultsAnalyzer;
 
-public class CoverageAnalyzer {
+public class CoverageAnalyzer implements ResultsAnalyzer {
 
     private CoverageResults coverage;
 
@@ -27,8 +28,8 @@ public class CoverageAnalyzer {
       else
         methods = coverage.getMethodCoverage(className);
 
-      for(MethodCoverage method: methods.values()) {
-        for(Line line: method.getLines()) {
+      for (MethodCoverage method: methods.values()) {
+        for (Line line: method.getLines()) {
           if (line.getLineNumber() == lineNumber)
             return line.isCovered();
         }
@@ -43,8 +44,8 @@ public class CoverageAnalyzer {
       else
         methods = coverage.getMethodCoverage(className);
 
-      for(MethodCoverage method: methods.values()) {
-        for(Branch branch: method.getBranches()) {
+      for (MethodCoverage method: methods.values()) {
+        for (Branch branch: method.getBranches()) {
           if (branch.getLine().getLineNumber() == lineNumber) {
             return branch.getLine().isCovered();
           }
@@ -70,9 +71,56 @@ public class CoverageAnalyzer {
       return false;
     }
 
+    public int totalLines() {
+        int count = 0;
+        for (String s: coverage.getCoverage().keySet()) {
+            count += this.totalLinesInClass(s);
+        }
+        return count;
+    }
+
+    public int totalBranches() {
+        int count = 0;
+        for (String s: coverage.getCoverage().keySet()) {
+            count += this.totalBranchesInClass(s);
+        }
+        return count;
+    }
+
+    public int totalConditions() {
+        int count = 0;
+        for (String s: coverage.getCoverage().keySet()) {
+            count += this.totalConditionsInClass(s);
+        }
+        return count;
+    }
+
+    public int totalLinesCovered() {
+        int count = 0;
+        for (String s: coverage.getCoverage().keySet()) {
+            count += this.linesCoveredInClass(s);
+        }
+        return count;
+    }
+
+    public int totalBranchesCovered() {
+        int count = 0;
+        for (String s: coverage.getCoverage().keySet()) {
+            count += this.branchesCoveredInClass(s);
+        }
+        return count;
+    }
+
+    public int totalConditionsCovered() {
+        int count = 0;
+        for (String s: coverage.getCoverage().keySet()) {
+            count += this.conditionsCoveredInClass(s);
+        }
+        return count;
+    }
 
     // How many lines are covered in class 'className'
-    public int lineCoveredCount(String className) {
+    public int linesCoveredInClass(String className) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -93,7 +141,7 @@ public class CoverageAnalyzer {
     }
 
     // How many lines are in class 'className'
-    public int lineCount(String className) {
+    public int totalLinesInClass(String className) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -115,7 +163,7 @@ public class CoverageAnalyzer {
     }
 
     // How many branches are covered in class 'className'
-    public int branchCoveredCount(String className) {
+    public int branchesCoveredInClass(String className) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -134,7 +182,7 @@ public class CoverageAnalyzer {
     }
 
     // How many branches are in class 'className'
-    public int branchCount(String className) {
+    public int totalBranchesInClass(String className) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -151,7 +199,7 @@ public class CoverageAnalyzer {
     }
 
     // How many conditions are covered in class 'className'
-    public int conditionCoveredCount(String className) {
+    public int conditionsCoveredInClass(String className) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -170,7 +218,7 @@ public class CoverageAnalyzer {
     }
 
     // How many conditions are in in class 'className'
-    public int conditionCount(String className) {
+    public int totalConditionsInClass(String className) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -186,54 +234,6 @@ public class CoverageAnalyzer {
       return count;
     }
 
-    public int totalLines() {
-      int count = 0;
-      for(String s: coverage.getCoverage().keySet()) {
-        count += this.lineCount(s);
-      }
-      return count;
-    }
-
-    public int totalBranches() {
-      int count = 0;
-      for(String s: coverage.getCoverage().keySet()) {
-        count += this.branchCount(s);
-      }
-      return count;
-    }
-
-    public int totalConditions() {
-      int count = 0;
-      for(String s: coverage.getCoverage().keySet()) {
-        count += this.conditionCount(s);
-      }
-      return count;
-    }
-
-    public int totalLinesCovered() {
-      int count = 0;
-      for(String s: coverage.getCoverage().keySet()) {
-        count += this.lineCoveredCount(s);
-      }
-      return count;
-    }
-
-    public int totalBranchesCovered() {
-      int count = 0;
-      for(String s: coverage.getCoverage().keySet()) {
-        count += this.branchCoveredCount(s);
-      }
-      return count;
-    }
-
-    public int totalConditionsCovered() {
-      int count = 0;
-      for(String s: coverage.getCoverage().keySet()) {
-        count += this.conditionCoveredCount(s);
-      }
-      return count;
-    }
-
     public int linesInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
@@ -242,9 +242,9 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      for(MethodCoverage method: methods.values()) {
-        if(method.getName().equals(methodName)) {
-          for(Line line: method.getLines()) {
+      for (MethodCoverage method: methods.values()) {
+        if (method.getName().equals(methodName)) {
+          for (Line line: method.getLines()) {
               count++;
           }
         }
@@ -260,9 +260,9 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      for(MethodCoverage method: methods.values()) {
-        if(method.getName().equals(methodName)) {
-          for(Branch branch: method.getBranches()) {
+      for (MethodCoverage method: methods.values()) {
+        if (method.getName().equals(methodName)) {
+          for (Branch branch: method.getBranches()) {
               count++;
           }
         }
@@ -278,9 +278,9 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      for(MethodCoverage method: methods.values()) {
-        if(method.getName().equals(methodName)) {
-          for(Condition condition: method.getConditions()) {
+      for (MethodCoverage method: methods.values()) {
+        if (method.getName().equals(methodName)) {
+          for (Condition condition: method.getConditions()) {
               count++;
           }
         }
@@ -288,7 +288,7 @@ public class CoverageAnalyzer {
       return count;
     }
 
-    public int linesCoveredInMethodCount(String className, String methodName) {
+    public int linesCoveredInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -296,10 +296,10 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      for(MethodCoverage method: methods.values()) {
-        if(method.getName().equals(methodName)) {
-          for(Line line: method.getLines()) {
-            if(line.isCovered())
+      for (MethodCoverage method: methods.values()) {
+        if (method.getName().equals(methodName)) {
+          for (Line line: method.getLines()) {
+            if (line.isCovered())
               count++;
           }
         }
@@ -307,7 +307,7 @@ public class CoverageAnalyzer {
       return count;
     }
 
-    public int branchesCoveredInMethodCount(String className, String methodName) {
+    public int branchesCoveredInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
@@ -315,10 +315,10 @@ public class CoverageAnalyzer {
         methods = coverage.getMethodCoverage(className);
 
       int count = 0;
-      for(MethodCoverage method: methods.values()) {
-        if(method.getName().equals(methodName)) {
-          for(Branch branch: method.getBranches()) {
-            if(branch.getLine().isCovered())
+      for (MethodCoverage method: methods.values()) {
+        if (method.getName().equals(methodName)) {
+          for (Branch branch: method.getBranches()) {
+            if (branch.getLine().isCovered())
               count++;
           }
         }
@@ -326,7 +326,7 @@ public class CoverageAnalyzer {
       return count;
     }
 
-    public int conditionsCoveredInMethodCount(String className, String methodName) {
+    public int conditionsCoveredInMethod(String className, String methodName) {
       HashMap<String, MethodCoverage> methods;
       if (coverage.getMethodCoverage(className) == null)
         return 0;
