@@ -14,21 +14,6 @@ public class ClassCoverage {
 
     public void addMethodData(MethodCoverage methodCoverage) {
         methods.put(methodCoverage.getName(), methodCoverage);
-        /*if (methods.get(methodCoverage.getName()) == null) {
-            methods.put(methodCoverage.getName(), methodCoverage);
-        } else {
-            MethodCoverage method = methods.get(methodCoverage.getName());
-            for (Line line: methodCoverage.getLines()) {
-                method.addLine(line);
-            }
-            for (Branch branch: methodCoverage.getBranches()) {
-                method.addBranch(branch);
-            }
-            for (Condition condition: methodCoverage.getConditions()) {
-                method.addCondition(condition);
-                methods.put(methodCoverage.getName(), method);
-            }
-        }*/
     }
 
     public String getName() {

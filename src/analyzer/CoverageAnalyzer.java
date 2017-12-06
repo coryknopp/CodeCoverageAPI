@@ -2,11 +2,20 @@ package analyzer;
 
 import java.util.*;
 
+import adapter.CoberturaAdapter;
 import data_model.*;
+import formatter.CSVFormatter;
 
 public class CoverageAnalyzer {
 
     private CoverageResults coverage;
+
+    public CoverageAnalyzer(String serFilepath) {
+        // STEP 1: Parse Cobertura's serialized data file
+        CoberturaAdapter adapter = new CoberturaAdapter(serFilepath);
+        // STEP 2: Output CoverageResults data structure
+        coverage = adapter.getCoverageResults();
+    }
 
     public CoverageAnalyzer(CoverageResults coverage) {
         this.coverage = coverage;
@@ -351,20 +360,5 @@ public class CoverageAnalyzer {
         }
       }
       return count;
-    }
-
-
-    public int[] linesCoveredByTest(Class<?> z) {
-        return new int[0];
-    }
-
-
-    public int[] branchesCoveredByTest(Class<?> z) {
-        return new int[0];
-    }
-
-
-    public int[] conditionsCoveredByTest(Class<?> z) {
-        return new int[0];
     }
 }
