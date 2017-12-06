@@ -5,13 +5,13 @@ public class Condition {
     private Line line;
     private Branch branch;
     private int index;
-    private float coverageRate;
+    private boolean isCovered;
 
-    public Condition(Line line, Branch branch, int index, float coverageRate) {
+    public Condition(Line line, Branch branch, int index, boolean isCovered) {
         this.line = line;
         this.branch = branch;
         this.index = index;
-        this.coverageRate = coverageRate;
+        this.isCovered = isCovered;
     }
 
     public Line getLine() {
@@ -26,7 +26,7 @@ public class Condition {
         return index;
     }
 
-    public float getCoverageRate() {
-        return coverageRate;
+    public boolean isCovered() {
+        return isCovered;
     }
 }

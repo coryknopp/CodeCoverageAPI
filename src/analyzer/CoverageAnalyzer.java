@@ -157,7 +157,7 @@ public class CoverageAnalyzer {
       int count = 0;
       for (MethodCoverage method: methods.values()) {
         for (Condition condition: method.getConditions()) {
-            if (condition.getCoverageRate() > 0) {
+            if (condition.isCovered()) {
               count++;
             }
         }
