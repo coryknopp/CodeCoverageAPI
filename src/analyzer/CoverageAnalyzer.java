@@ -21,54 +21,51 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
         this.coverage = coverage;
     }
 
-    public boolean isLineCovered(String className, int lineNumber) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return false;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      for (MethodCoverage method: methods.values()) {
-        for (Line line: method.getLines()) {
-          if (line.getLineNumber() == lineNumber)
-            return line.isCovered();
+    public boolean isLineCovered(String className, int lineNumber) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+          HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            for (MethodCoverage method : methods.values()) {
+              for (Line line : method.getLines()) {
+                  if (line.getLineNumber() == lineNumber)
+                      return line.isCovered();
+              }
+            }
+            throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
         }
-      }
-      return false;
     }
 
-    public boolean isBranchCovered(String className, int lineNumber) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return false;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      for (MethodCoverage method: methods.values()) {
-        for (Branch branch: method.getBranches()) {
-          if (branch.getLine().getLineNumber() == lineNumber) {
-            return branch.getLine().isCovered();
-          }
+    public boolean isBranchCovered(String className, int lineNumber) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            for (MethodCoverage method : methods.values()) {
+                for (Branch branch : method.getBranches()) {
+                    if (branch.getLine().getLineNumber() == lineNumber) {
+                        return branch.getLine().isCovered();
+                    }
+                }
+            }
+            throw new IllegalArgumentException("Line " + lineNumber + " is not a branch");
         }
-      }
-      return false;
     }
 
-    public boolean isConditionCovered(String className, int lineNumber, int conditionIndex) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return false;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      for (MethodCoverage method: methods.values()) {
-        for (Condition condition: method.getConditions()) {
-          if (condition.getLine().getLineNumber() == lineNumber && condition.getIndex() == conditionIndex) {
-            return condition.isCovered();
-          }
+    public boolean isConditionCovered(String className, int lineNumber, int conditionIndex) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            for (MethodCoverage method : methods.values()) {
+                for (Condition condition : method.getConditions()) {
+                    if (condition.getLine().getLineNumber() == lineNumber && condition.getIndex() == conditionIndex) {
+                        return condition.isCovered();
+                    }
+                }
+            }
+            throw new IllegalArgumentException("Condition " + conditionIndex + " is not a condition");
         }
-      }
-      return false;
     }
 
     public int totalLines() {
@@ -120,228 +117,241 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     // How many lines are covered in class 'className'
-    public int linesCoveredInClass(String className) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      HashMap<Integer, Boolean> linesFound = new HashMap<Integer, Boolean>();
-      for (MethodCoverage method: methods.values()) {
-        for (Line line: method.getLines()) {
-            if (line.isCovered() && linesFound.get(line.getLineNumber()) == null) {
-              linesFound.put(line.getLineNumber(), true);
-              count++;
+    public int linesCoveredInClass(String className) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            for (MethodCoverage method : methods.values()) {
+                for (Line line : method.getLines()) {
+                    if (line.isCovered()) {
+                        count++;
+                    }
+                }
             }
+            return count;
         }
-      }
-      return count;
     }
 
     // How many lines are in class 'className'
-    public int totalLinesInClass(String className) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      // Make sure you don't cound the same line twice
-      HashMap<Integer, Boolean> linesFound = new HashMap<>();
-      for (MethodCoverage method: methods.values()) {
-        for (Line line: method.getLines()) {
-            if (linesFound.get(line.getLineNumber()) == null) {
-              linesFound.put(line.getLineNumber(), true);
-              count++;
+    public int totalLinesInClass(String className) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            // Make sure you don't cound the same line twice
+            for (MethodCoverage method : methods.values()) {
+                for (Line line : method.getLines()) {
+                    count++;
+                }
             }
+            return count;
         }
-      }
-      return count;
     }
 
     // How many branches are covered in class 'className'
-    public int branchesCoveredInClass(String className) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
+    public int branchesCoveredInClass(String className) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
 
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        for (Branch branch: method.getBranches()) {
-            if (branch.isCovered()) {
-              count++;
+            int count = 0;
+            for (MethodCoverage method : methods.values()) {
+                for (Branch branch : method.getBranches()) {
+                    if (branch.isCovered()) {
+                        count++;
+                    }
+                }
             }
+            return count;
         }
-      }
-      return count;
     }
 
     // How many branches are in class 'className'
-    public int totalBranchesInClass(String className) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        for (Branch branch: method.getBranches()) {
-            count++;
+    public int totalBranchesInClass(String className) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            for (MethodCoverage method : methods.values()) {
+                for (Branch branch : method.getBranches()) {
+                    count++;
+                }
+            }
+            return count;
         }
-      }
-      return count;
     }
 
     // How many conditions are covered in class 'className'
-    public int conditionsCoveredInClass(String className) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        for (Condition condition: method.getConditions()) {
-            if (condition.isCovered()) {
-              count++;
+    public int conditionsCoveredInClass(String className) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            for (MethodCoverage method : methods.values()) {
+                for (Condition condition : method.getConditions()) {
+                    if (condition.isCovered()) {
+                        count++;
+                    }
+                }
             }
+            return count;
         }
-      }
-      return count;
     }
 
     // How many conditions are in in class 'className'
-    public int totalConditionsInClass(String className) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        for (Condition condition: method.getConditions()) {
-            count++;
+    public int totalConditionsInClass(String className) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            for (MethodCoverage method : methods.values()) {
+                for (Condition condition : method.getConditions()) {
+                    count++;
+                }
+            }
+            return count;
         }
-      }
-      return count;
     }
 
-    public int linesInMethod(String className, String methodName) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        if (method.getName().equals(methodName)) {
-          for (Line line: method.getLines()) {
-              count++;
-          }
+    public int linesInMethod(String className, String methodName) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            boolean methodExists = false;
+            for (MethodCoverage method : methods.values()) {
+                if (method.getName().equals(methodName)) {
+                    methodExists = true;
+                    for (Line line : method.getLines()) {
+                        count++;
+                    }
+                }
+            }
+            if (!methodExists) {
+                throw new IllegalArgumentException("Method " + methodName + " does not exist");
+            }
+            return count;
         }
-      }
-      return count;
     }
 
-    public int branchesInMethod(String className, String methodName) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        if (method.getName().equals(methodName)) {
-          for (Branch branch: method.getBranches()) {
-              count++;
-          }
+    public int branchesInMethod(String className, String methodName) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            boolean methodExists = false;
+            for (MethodCoverage method : methods.values()) {
+                if (method.getName().equals(methodName)) {
+                    methodExists = true;
+                    for (Branch branch : method.getBranches()) {
+                        count++;
+                    }
+                }
+            }
+            if (!methodExists) {
+                throw new IllegalArgumentException("Method " + methodName + " does not exist");
+            }
+            return count;
         }
-      }
-      return count;
     }
 
-    public int conditionsInMethod(String className, String methodName) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        if (method.getName().equals(methodName)) {
-          for (Condition condition: method.getConditions()) {
-              count++;
-          }
+    public int conditionsInMethod(String className, String methodName) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            boolean methodExists = false;
+            for (MethodCoverage method : methods.values()) {
+                if (method.getName().equals(methodName)) {
+                    methodExists = true;
+                    for (Condition condition : method.getConditions()) {
+                        count++;
+                    }
+                }
+            }
+            if (!methodExists) {
+                throw new IllegalArgumentException("Method " + methodName + " does not exist");
+            }
+            return count;
         }
-      }
-      return count;
     }
 
-    public int linesCoveredInMethod(String className, String methodName) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        if (method.getName().equals(methodName)) {
-          for (Line line: method.getLines()) {
-            if (line.isCovered())
-              count++;
-          }
+    public int linesCoveredInMethod(String className, String methodName) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            boolean methodExists = false;
+            for (MethodCoverage method : methods.values()) {
+                if (method.getName().equals(methodName)) {
+                    methodExists = true;
+                    for (Line line : method.getLines()) {
+                        if (line.isCovered())
+                            count++;
+                    }
+                }
+            }
+            if (!methodExists) {
+                throw new IllegalArgumentException("Method " + methodName + " does not exist");
+            }
+            return count;
         }
-      }
-      return count;
     }
 
-    public int branchesCoveredInMethod(String className, String methodName) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        if (method.getName().equals(methodName)) {
-          for (Branch branch: method.getBranches()) {
-            if (branch.getLine().isCovered())
-              count++;
-          }
+    public int branchesCoveredInMethod(String className, String methodName) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            boolean methodExists = false;
+            for (MethodCoverage method : methods.values()) {
+                if (method.getName().equals(methodName)) {
+                    methodExists = true;
+                    for (Branch branch : method.getBranches()) {
+                        if (branch.getLine().isCovered())
+                            count++;
+                    }
+                }
+            }
+            if (!methodExists) {
+                throw new IllegalArgumentException("Method " + methodName + " does not exist");
+            }
+            return count;
         }
-      }
-      return count;
     }
 
-    public int conditionsCoveredInMethod(String className, String methodName) {
-      HashMap<String, MethodCoverage> methods;
-      if (coverage.getMethodCoverage(className) == null)
-        return 0;
-      else
-        methods = coverage.getMethodCoverage(className);
-
-      int count = 0;
-      for (MethodCoverage method: methods.values()) {
-        if (method.getName().equals(methodName)) {
-          for (Condition condition: method.getConditions()) {
-            if (condition.isCovered())
-              count++;
-          }
+    public int conditionsCoveredInMethod(String className, String methodName) throws IllegalArgumentException {
+        if (coverage.getMethodCoverage(className) == null) {
+            throw new IllegalArgumentException("Class " + className + " does not exist");
+        } else {
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            int count = 0;
+            boolean methodExists = false;
+            for (MethodCoverage method : methods.values()) {
+                if (method.getName().equals(methodName)) {
+                    methodExists = true;
+                    for (Condition condition : method.getConditions()) {
+                        if (condition.isCovered())
+                            count++;
+                    }
+                }
+            }
+            if (!methodExists) {
+                throw new IllegalArgumentException("Method " + methodName + " does not exist");
+            }
+            return count;
         }
-      }
-      return count;
     }
 }

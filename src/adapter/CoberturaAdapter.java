@@ -79,19 +79,6 @@ public class CoberturaAdapter implements CoverageAdapter {
         }
         classCoverage.addMethodData(method);
         coverage.addClassCoverage(classCoverage);
-        // Check that data is accurate
-        // getCoberturaResults(classData);
-    }
-
-    private void getCoberturaResults(ClassData classData) {
-        if (classData.getName().equals("triangle.Triangle")) {
-            System.out.println("COBERTURA RESULTS:");
-            System.out.println("Total lines in triangle " + classData.getNumberOfValidLines());
-            System.out.println("Lines covered in triangle " + classData.getNumberOfCoveredLines());
-            System.out.println("Total branches in triangle " + classData.getNumberOfValidBranches());
-            System.out.println("Branches covered in triangle " + classData.getNumberOfCoveredBranches());
-            System.out.println("Line 21 Covered " + classData.getLineCoverage(21).isCovered());
-        }
     }
 
     private int getConditionNumber(LineData lineData) {
