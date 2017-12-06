@@ -13,7 +13,7 @@ public class CoverageAnalyzerTests {
 	public static void setup(){
 		String serFilepath = "cobertura.ser";
 		analyzer = new CoverageAnalyzer(serFilepath);
-		complete = System.getProperty("isCompleteCoverage").equals("true")
+		complete = System.getProperty("isCompleteCoverage").equals("true");
 	}
 
 	@Test
@@ -36,24 +36,17 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testConditionCoverage(){
-		boolean line20 = complete ? true : false;
-		boolean line34 = complete ? true : false;
-		boolean line27 = true;
-		Assert.assertEquals(analyzer.isConditionCovered("classify", 20), line20);
-		Assert.assertEquals(analyzer.isConditionCovered("classify", 34), line34);
-		Assert.assertEquals(analyzer.isConditionCovered("classify", 27), line27);
+		boolean line20_0 = complete ? true : false;
+		boolean line34_0 = complete ? true : false;
+		boolean line27_0 = true;
+		Assert.assertEquals(analyzer.isConditionCovered("classify", 20, 0), line20_0);
+		Assert.assertEquals(analyzer.isConditionCovered("classify", 34, 0), line34_0);
+		Assert.assertEquals(analyzer.isConditionCovered("classify", 27, 0), line27_0);
 	}
 
 	@Test
 	public void testLineCount(){
-		int line20 = complete ? 66 : 4;
-		int line21 = complete ? 17 : 0;
-		int line34 = complete ? 23 : 0;
-		int line39 = 0;
-		Assert.assertEquals(analyzer.lineCoveredCount("classify", 20), line20);
-		Assert.assertEquals(analyzer.lineCoveredCount("classify", 21), line21);
-		Assert.assertEquals(analyzer.lineCoveredCount("classify", 34), line34);
-		Assert.assertEquals(analyzer.lineCoveredCount("classify", 39), line39);
+		Assert.assertEquals(analyzer.lineCoveredCount("classify"), 19);
 	}
 
 }
