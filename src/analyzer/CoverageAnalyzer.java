@@ -4,7 +4,6 @@ import java.util.*;
 
 import adapter.CoberturaAdapter;
 import data_model.*;
-import formatter.ResultsAnalyzer;
 
 public class CoverageAnalyzer implements ResultsAnalyzer {
 
@@ -22,7 +21,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public boolean isLineCovered(String className, int lineNumber) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -42,7 +41,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public boolean isBranchCovered(String className, int lineNumber) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -131,7 +130,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     // How many lines are covered in class 'className'
     public int linesCoveredInClass(String className) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -149,7 +148,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     // How many lines are in class 'className'
     public int totalLinesInClass(String className) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -166,7 +165,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     // How many branches are covered in class 'className'
     public int branchesCoveredInClass(String className) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -185,7 +184,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     // How many branches are in class 'className'
     public int totalBranchesInClass(String className) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -201,7 +200,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     // How many conditions are covered in class 'className'
     public int conditionsCoveredInClass(String className) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -219,7 +218,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
 
     // How many conditions are in in class 'className'
     public int totalConditionsInClass(String className) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -234,7 +233,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public int linesInMethod(String className, String methodName) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -256,7 +255,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public int branchesInMethod(String className, String methodName) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -278,7 +277,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public int conditionsInMethod(String className, String methodName) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -300,7 +299,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public int linesCoveredInMethod(String className, String methodName) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -324,7 +323,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public int branchesCoveredInMethod(String className, String methodName) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
@@ -348,7 +347,7 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
     }
 
     public int conditionsCoveredInMethod(String className, String methodName) throws IllegalArgumentException {
-        if (coverage.getMethodCoverage(className) == null) {
+        if (coverage.getCoverage().get(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
             HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);

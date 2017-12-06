@@ -1,4 +1,4 @@
-package formatter;
+package analyzer;
 
 public interface ResultsAnalyzer {
 
