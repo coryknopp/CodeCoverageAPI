@@ -53,7 +53,7 @@
                showoutput="true"
                fork="true"
                haltonfailure="false">
-            <sysproperty key="isCompleteCoverage" value="true"/>
+            <sysproperty key="isCompleteCoverage" value="false"/>
             <formatter type="plain"
                        usefile="false"/>
             <classpath path="output"/>

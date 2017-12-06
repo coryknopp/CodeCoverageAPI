@@ -12,25 +12,25 @@ echo "=================================================================="
 echo "Compiling coverage API..."
 echo "=================================================================="
 echo
-ant -buildfile api.xml clean compile
+ant -buildfile api_less.xml clean compile
 
 echo
 echo "=================================================================="
 echo "Compiling coverage API tests..."
 echo "=================================================================="
 echo
-ant -buildfile api.xml compile.tests
+ant -buildfile api_less.xml compile.tests
 
 echo
 echo "=================================================================="
 echo "Running coverage API tests..."
 echo "=================================================================="
 echo
-ant -buildfile api.xml test
+ant -buildfile api_less.xml test
 
 echo
 echo "=================================================================="
 echo "Running coverage API..."
 echo "=================================================================="
 echo
-ant -buildfile api.xml run
+ant -buildfile api_less.xml run

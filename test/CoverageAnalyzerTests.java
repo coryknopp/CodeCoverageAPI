@@ -18,6 +18,11 @@ public class CoverageAnalyzerTests {
 		System.out.println("Testing on " + a + " test cases");
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testNulls(){
+		analyzer.isLineCovered(null, 0);
+	}
+
 	@Test
 	public void testLineCoverage(){
 		boolean line20 = true; //line 20 is covered in both cases
@@ -45,8 +50,26 @@ public class CoverageAnalyzerTests {
 	}
 
 	@Test
-	public void testLineCount(){
-		Assert.assertEquals(analyzer.totalLinesCovered(), 19);
+	public void testTotalLines(){
+		Assert.assertEquals(analyzer.totalLines(), 25);
+	}
+
+	@Test
+	public void testTotalLineCount(){
+		if (complete) {
+			Assert.assertEquals(analyzer.totalLinesCovered(), 25);
+		}else{
+			Assert.assertEquals(analyzer.totalLinesCovered(), 19);
+		}
+	}
+
+	@Test
+	public void testTotalConditions(){
+		if (complete){
+			Assert.assertEquals(analyzer.totalConditionsCovered(), 17);
+		}else{
+			Assert.assertEquals(analyzer.totalConditionsCovered(), 14);
+		}
 	}
 
 }
