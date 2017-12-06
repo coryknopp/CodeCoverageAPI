@@ -14,26 +14,6 @@ public class CoverageResults implements CoverageModel {
         coverage.put(classCoverage.getName(), classCoverage);
     }
 
-    public void addTestMethod(String testClass) {
-        // allTests.add(testClass);
-    }
-
-    public void addLine(String testClass, String className, Line line) {
-
-    }
-
-    public void addBranch(String testClass, String className, Branch branch) {
-
-    }
-
-    public void addCondition(String testClass, String className, Condition condition) {
-
-    }
-
-    public void addClassAndTest(String testClass, String className) {
-
-    }
-
     public ClassCoverage get(String className) {
         return coverage.get(className);
     }
