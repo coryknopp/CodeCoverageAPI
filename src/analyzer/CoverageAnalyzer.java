@@ -25,14 +25,19 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
         if (coverage.getMethodCoverage(className) == null) {
             throw new IllegalArgumentException("Class " + className + " does not exist");
         } else {
-          HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
+            HashMap<String, MethodCoverage> methods = coverage.getMethodCoverage(className);
             for (MethodCoverage method : methods.values()) {
-              for (Line line : method.getLines()) {
-                  if (line.getLineNumber() == lineNumber)
-                      return line.isCovered();
-              }
+                for (Line line : method.getLines()) {
+                    if (line.getLineNumber() == lineNumber) {
+                        return line.isCovered();
+                    }
+                }
             }
-            throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            if (lineNumber < totalLinesInClass(className)) {
+                return false;
+            } else {
+                throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            }
         }
     }
 
@@ -48,7 +53,11 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                     }
                 }
             }
-            throw new IllegalArgumentException("Line " + lineNumber + " is not a branch");
+            if (lineNumber < totalLinesInClass(className)) {
+                throw new IllegalArgumentException("Line " + lineNumber + " is not a branch");
+            } else {
+                throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            }
         }
     }
 
@@ -64,7 +73,11 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                     }
                 }
             }
-            throw new IllegalArgumentException("Condition " + conditionIndex + " is not a condition");
+            if (lineNumber < totalLinesInClass(className)) {
+                throw new IllegalArgumentException("Condition " + conditionIndex + " is not a condition");
+            } else {
+                throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            }
         }
     }
 
@@ -297,8 +310,9 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                 if (method.getName().equals(methodName)) {
                     methodExists = true;
                     for (Line line : method.getLines()) {
-                        if (line.isCovered())
+                        if (line.isCovered()) {
                             count++;
+                        }
                     }
                 }
             }
@@ -320,8 +334,9 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                 if (method.getName().equals(methodName)) {
                     methodExists = true;
                     for (Branch branch : method.getBranches()) {
-                        if (branch.getLine().isCovered())
+                        if (branch.getLine().isCovered()) {
                             count++;
+                        }
                     }
                 }
             }
@@ -343,8 +358,9 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                 if (method.getName().equals(methodName)) {
                     methodExists = true;
                     for (Condition condition : method.getConditions()) {
-                        if (condition.isCovered())
+                        if (condition.isCovered()) {
                             count++;
+                        }
                     }
                 }
             }

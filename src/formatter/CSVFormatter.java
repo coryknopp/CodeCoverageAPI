@@ -36,7 +36,6 @@ public class CSVFormatter {
         coverage.put("Branches covered in triangle", Integer.toString(analyzer.branchesCoveredInClass("triangle.Triangle")));
         coverage.put("Total conditions in triangle", Integer.toString(analyzer.totalConditionsInClass("triangle.Triangle")));
         coverage.put("Conditions covered in triangle", Integer.toString(analyzer.conditionsCoveredInClass("triangle.Triangle")));
-        coverage.put("Line 15 Covered", Boolean.toString(analyzer.isLineCovered("triangle.Triangle", 15)));
         coverage.put("Line 21 Covered", Boolean.toString(analyzer.isLineCovered("triangle.Triangle", 21)));
         coverage.put("Lines in classify", Integer.toString(analyzer.linesInMethod("triangle.Triangle", "classify")));
         coverage.put("Branches in classify", Integer.toString(analyzer.branchesInMethod("triangle.Triangle", "classify")));
