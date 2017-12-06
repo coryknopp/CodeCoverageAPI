@@ -53,7 +53,11 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                     }
                 }
             }
-            throw new IllegalArgumentException("Line " + lineNumber + " is not a branch");
+            if (lineNumber < totalLinesInClass(className)) {
+                throw new IllegalArgumentException("Line " + lineNumber + " is not a branch");
+            } else {
+                throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            }
         }
     }
 
@@ -69,7 +73,11 @@ public class CoverageAnalyzer implements ResultsAnalyzer {
                     }
                 }
             }
-            throw new IllegalArgumentException("Condition " + conditionIndex + " is not a condition");
+            if (lineNumber < totalLinesInClass(className)) {
+                throw new IllegalArgumentException("Condition " + conditionIndex + " is not a condition");
+            } else {
+                throw new IllegalArgumentException("Line " + lineNumber + " does not exist in class " + className);
+            }
         }
     }
 
