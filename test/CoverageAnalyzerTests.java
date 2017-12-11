@@ -19,8 +19,13 @@ public class CoverageAnalyzerTests {
 	}
 
 	@Test(expected=IllegalArgumentException.class)
-	public void testNulls(){
+	public void testNullOnIsLineCovered(){
 		analyzer.isLineCovered(null, 0);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullOnIsConditionCovered(){
+		analyzer.isConditionCovered(null,0 ,0);
 	}
 
 	@Test
@@ -38,6 +43,26 @@ public class CoverageAnalyzerTests {
 	// 	Assert.assertEquals(analyzer.isBranchCovered("triangle.Triangle", 27), line27);
 	// 	Assert.assertEquals(analyzer.isBranchCovered("triangle.Triangle", 34), line34);
 	// }
+	@Test(expected=IllegalArgumentException.class)
+	public void testWrongLineOnLineCoverage(){
+		Assert.assertEquals(analyzer.isLineCovered("triangle.Triangle", 55), false);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testWrongClassnameOnLineCoverage(){
+		Assert.assertEquals(analyzer.isLineCovered("nothing", 0), false);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testWrongLineOnConditionCoverage(){
+		//line 28 is not a condition
+		Assert.assertEquals(analyzer.isConditionCovered("triangle.Triangle", 28, 0), false);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testWrongClassnameOnConditionCoverage(){
+		Assert.assertEquals(analyzer.isConditionCovered("unicorn", 28, 0), false);
+	}
 
 	@Test
 	public void testConditionCoverage(){
