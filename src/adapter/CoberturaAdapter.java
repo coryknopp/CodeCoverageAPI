@@ -44,13 +44,20 @@ public class CoberturaAdapter implements CoverageAdapter {
                     classCoverage.addMethodData(method);
                     method = new MethodCoverage(lineData.getMethodName());
                 }
+                // Parse line coverage
                 if (lineData.isCovered() || lineData.getNumberOfCoveredBranches() > 0) {
                     line = new Line(l, true);
                 } else {
                     line = new Line(l, false);
                 }
                 method.addLine(line);
-                if (lineData.getNumberOfValidBranches() > 0) {
+                // Parse branch coverage
+                if (lineData.hasBranch()) {
+                    // Default
+                    Branch branch = new Branch(line, lineData.isCovered());
+                    method.addBranch(branch);
+                }
+                /*if (lineData.getNumberOfValidBranches() > 0) {
                     int coveredBranches = lineData.getNumberOfCoveredBranches();
                     int coveredBranchesCounted = 0;
                     for (int i = 0; i < lineData.getNumberOfValidBranches(); i++) {
@@ -63,12 +70,13 @@ public class CoberturaAdapter implements CoverageAdapter {
                         }
                         method.addBranch(branch);
                     }
-                }
+                }*/
+                // Parse condition coverage
                 int totalConditions = getConditionNumber(lineData);
                 for (int i = 0; i < totalConditions; i++) {
                     Condition condition;
                     JumpData jumpData = (JumpData) lineData.getConditionData(i);
-                    if (jumpData != null && jumpData.getBranchCoverageRate() > 0) {
+                    if (jumpData != null && jumpData.getBranchCoverageRate() == 1) {
                         condition = new Condition(line, i, true);
                     } else {
                         condition = new Condition(line, i, false);
