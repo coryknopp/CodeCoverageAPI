@@ -1,4 +1,4 @@
-package triangle;
+package shapes;
 
 /**
  * An implementation that classifies triangles.
@@ -8,10 +8,10 @@ public class Rectangle {
     /**
      * This enum gives the type of the Rectangle
      */
-    private static enum Type {
+    public static enum Type {
         INVALID, RECTANGLE, SQUARE
     };
-    
+
     /**
      * This static method does the actual classification of a triangle, given the lengths
      * of its three sides.
@@ -21,7 +21,7 @@ public class Rectangle {
             return Type.SQUARE;
         else if(isRectangle(left, right, top, bottom))
             return Type.RECTANGLE;
-        else 
+        else
             return Type.INVALID;
     }
 
@@ -43,15 +43,15 @@ public class Rectangle {
     public static boolean isSquare(int left, int right, int top, int bottom) {
         if(left == right) {
             if(top == bottom) {
-                if(top == left) 
+                if(top == left)
                     return true;
-                else 
+                else
                     return false;
             }
             else
-                return false;    
+                return false;
         }
-        else 
+        else
             return false;
     }
 

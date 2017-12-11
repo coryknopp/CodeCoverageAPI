@@ -1,3 +1,5 @@
+package shapes;
+
 /**
  * An implementation that classifies triangles.
  */
@@ -6,10 +8,10 @@ public class Triangle {
     /**
      * This enum gives the type of the triangle.
      */
-    private static enum Type {
+    public static enum Type {
         INVALID, SCALENE, EQUILATERAL, ISOSCELES
     };
-    
+
     /**
      * This static method does the actual classification of a triangle, given the lengths
      * of its three sides.
