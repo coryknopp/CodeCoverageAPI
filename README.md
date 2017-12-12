@@ -16,84 +16,112 @@ Initialize a `CoverageAnalyzer` object, including the path to your serialized da
 
 ## isLineCovered
 
-`boolean isLineCovered(String className, int lineNumber)  throws IllegalArgumentException;`
+`isLineCovered(String className, int lineNumber);`
+
+Checks if line in class is covered. Returns true if line is covered, otherwise false.
+
+**Parameters:**
+`String className` Name of class containing line.
+`int lineNumber` Line number of line to be queried.
+
+**Returns:** boolean
+`true` if line is covered, otherwise `false`.
 
 ## isBranchCovered
 
-`boolean isBranchCovered(String className, int lineNumber) throws IllegalArgumentException;`
+`isBranchCovered(String className, int lineNumber);`
+
+Checks if branch in class is covered.
+
+**Parameters:**
+`String className` Name of class containing branch.
+`int lineNumber` Line number of branch to be queried.
+
+**Returns:** boolean
+`true` if branch is covered, otherwise `false`.
 
 ## isConditionCovered
 
-`boolean isConditionCovered(String className, int lineNumber, int conditionIndex) throws IllegalArgumentException;`
+`isConditionCovered(String className, int lineNumber, int conditionIndex);`
+
+Checks if condition in class is covered. Returns true if condition is covered, otherwise false.
+
+**Parameters:**
+`String className` Name of class containing condition.
+`int lineNumber` Line number of condition to be queried.
+`int conditionIndex` Index of condition on line.
+
+**Returns:** boolean
+`true` if condition is covered, otherwise `false`.
 
 ## totalLines
 
-`int totalLines();`
+`totalLines();`
 
 ## totalBranches
 
-`int totalBranches();`
+`totalBranches();`
 
 ## totalConditions
 
-`int totalConditions();`
+`totalConditions();`
 
 ## totalLinesCovered
 
-`int totalLinesCovered();`
+`totalLinesCovered();`
 
 ## totalBranchesCovered
 
-`int totalBranchesCovered();`
+`totalBranchesCovered();`
 
 ## totalConditionsCovered
 
-`int totalConditionsCovered();`
+`totalConditionsCovered();`
 
 ## linesCoveredInClass
 
-`int linesCoveredInClass(String className) throws IllegalArgumentException;`
+`linesCoveredInClass(String className);`
 
 ## totalLinesInClass
 
-`int totalLinesInClass(String className) throws IllegalArgumentException;`
+`totalLinesInClass(String className);`
 
 ## branchesCoveredInClass
 
-`int branchesCoveredInClass(String className) throws IllegalArgumentException;`
+`branchesCoveredInClass(String className);`
 
 ## totalBranchesInClass
 
-`int totalBranchesInClass(String className) throws IllegalArgumentException;`
+`totalBranchesInClass(String className);`
 
 ## conditionsCoveredInClass
 
-`int conditionsCoveredInClass(String className) throws IllegalArgumentException;`
+`conditionsCoveredInClass(String className);`
 
 ## totalConditionsInClass
 
-`int totalConditionsInClass(String className) throws IllegalArgumentException;`
+`totalConditionsInClass(String className);`
 
 ## linesInMethod
 
-`int linesInMethod(String className, String methodName) throws IllegalArgumentException;`
+`linesInMethod(String className, String methodName) ;`
 
 ## branchesInMethod
 
-`int branchesInMethod(String className, String methodName) throws IllegalArgumentException;`
+`branchesInMethod(String className, String methodName);`
 
 ## conditionsInMethod
 
-`int conditionsInMethod(String className, String methodName) throws IllegalArgumentException;`
+`conditionsInMethod(String className, String methodName);`
 
 ## linesCoveredInMethod
 
-`int linesCoveredInMethod(String className, String methodName) throws IllegalArgumentException;`
+`linesCoveredInMethod(String className, String methodName);`
 
 ## branchesCoveredInMethod
 
-`int branchesCoveredInMethod(String className, String methodName) throws IllegalArgumentException;`
+`branchesCoveredInMethod(String className, String methodName);`
 
 ## conditionsCoveredInMethod
 
-`int conditionsCoveredInMethod(String className, String methodName) throws IllegalArgumentException;`
+`conditionsCoveredInMethod(String className, String methodName);`
