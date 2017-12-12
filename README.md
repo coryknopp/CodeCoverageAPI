@@ -16,9 +16,11 @@ Initialize a `CoverageAnalyzer` object, including the path to your serialized da
 
 ## isLineCovered
 
-`isLineCovered(String className, int lineNumber);`
+```
+isLineCovered(String className, int lineNumber);
+```
 
-Checks if line in class is covered. Returns true if line is covered, otherwise false.
+Checks if line in class is covered. Returns `true` if line is covered, otherwise `false`.
 
 **Parameters:**
 
@@ -26,15 +28,13 @@ Checks if line in class is covered. Returns true if line is covered, otherwise f
 
 `int lineNumber` Line number of line to be queried.
 
-**Returns:** boolean
-
-`true` if line is covered, otherwise `false`.
-
 ## isBranchCovered
 
-`isBranchCovered(String className, int lineNumber);`
+```
+isBranchCovered(String className, int lineNumber);
+```
 
-Checks if branch in class is covered.
+Checks if branch in class is covered. Returns `true` if branch is covered, otherwise `false`.
 
 **Parameters:**
 
@@ -42,15 +42,13 @@ Checks if branch in class is covered.
 
 `int lineNumber` Line number of branch to be queried.
 
-**Returns:** boolean
-
-`true` if branch is covered, otherwise `false`.
-
 ## isConditionCovered
 
-`isConditionCovered(String className, int lineNumber, int conditionIndex);`
+```
+isConditionCovered(String className, int lineNumber, int conditionIndex);
+```
 
-Checks if condition in class is covered. Returns true if condition is covered, otherwise false.
+Checks if condition in class is covered. Returns `true` if condition is covered, otherwise `false`.
 
 **Parameters:**
 
@@ -60,78 +58,110 @@ Checks if condition in class is covered. Returns true if condition is covered, o
 
 `int conditionIndex` Index of condition on line.
 
-**Returns:** boolean
-
-`true` if condition is covered, otherwise `false`.
-
 ## totalLines
 
-`totalLines();`
+```
+totalLines();
+```
 
 ## totalBranches
 
-`totalBranches();`
+```
+totalBranches();
+```
 
 ## totalConditions
 
-`totalConditions();`
+```
+totalConditions();
+```
 
 ## totalLinesCovered
 
-`totalLinesCovered();`
+```
+totalLinesCovered();
+```
 
 ## totalBranchesCovered
 
-`totalBranchesCovered();`
+```
+totalBranchesCovered();
+```
 
 ## totalConditionsCovered
 
-`totalConditionsCovered();`
+```
+totalConditionsCovered();
+```
 
 ## linesCoveredInClass
 
-`linesCoveredInClass(String className);`
+```
+linesCoveredInClass(String className);
+```
 
 ## totalLinesInClass
 
-`totalLinesInClass(String className);`
+```
+totalLinesInClass(String className);
+```
 
 ## branchesCoveredInClass
 
-`branchesCoveredInClass(String className);`
+```
+branchesCoveredInClass(String className);
+```
 
 ## totalBranchesInClass
 
-`totalBranchesInClass(String className);`
+```
+totalBranchesInClass(String className);
+```
 
 ## conditionsCoveredInClass
 
-`conditionsCoveredInClass(String className);`
+```
+conditionsCoveredInClass(String className);
+```
 
 ## totalConditionsInClass
 
-`totalConditionsInClass(String className);`
+```
+totalConditionsInClass(String className);
+```
 
 ## linesInMethod
 
-`linesInMethod(String className, String methodName) ;`
+```
+linesInMethod(String className, String methodName) ;
+```
 
 ## branchesInMethod
 
-`branchesInMethod(String className, String methodName);`
+```
+branchesInMethod(String className, String methodName);
+```
 
 ## conditionsInMethod
 
-`conditionsInMethod(String className, String methodName);`
+```
+conditionsInMethod(String className, String methodName);
+```
 
 ## linesCoveredInMethod
 
-`linesCoveredInMethod(String className, String methodName);`
+```
+linesCoveredInMethod(String className, String methodName);
+```
 
 ## branchesCoveredInMethod
 
-`branchesCoveredInMethod(String className, String methodName);`
+```
+branchesCoveredInMethod(String className, String methodName);
+```
 
 ## conditionsCoveredInMethod
 
-`conditionsCoveredInMethod(String className, String methodName);`
+```
+conditionsCoveredInMethod(String className, String methodName);
+```
