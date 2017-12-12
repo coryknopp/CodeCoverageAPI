@@ -21,10 +21,13 @@ Initialize a `CoverageAnalyzer` object, including the path to your serialized da
 Checks if line in class is covered. Returns true if line is covered, otherwise false.
 
 **Parameters:**
+
 `String className` Name of class containing line.
+
 `int lineNumber` Line number of line to be queried.
 
 **Returns:** boolean
+
 `true` if line is covered, otherwise `false`.
 
 ## isBranchCovered
@@ -34,10 +37,13 @@ Checks if line in class is covered. Returns true if line is covered, otherwise f
 Checks if branch in class is covered.
 
 **Parameters:**
+
 `String className` Name of class containing branch.
+
 `int lineNumber` Line number of branch to be queried.
 
 **Returns:** boolean
+
 `true` if branch is covered, otherwise `false`.
 
 ## isConditionCovered
@@ -47,11 +53,15 @@ Checks if branch in class is covered.
 Checks if condition in class is covered. Returns true if condition is covered, otherwise false.
 
 **Parameters:**
+
 `String className` Name of class containing condition.
+
 `int lineNumber` Line number of condition to be queried.
+
 `int conditionIndex` Index of condition on line.
 
 **Returns:** boolean
+
 `true` if condition is covered, otherwise `false`.
 
 ## totalLines
