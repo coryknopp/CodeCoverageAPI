@@ -63,105 +63,183 @@ Checks if condition in class is covered. Returns `true` if condition is covered,
 ```
 totalLines();
 ```
+Returns number of lines (covered and not covered) in entire program.
 
 ## totalBranches
 
 ```
 totalBranches();
 ```
+Returns number of branches (covered and not covered) in entire program.
 
 ## totalConditions
 
 ```
 totalConditions();
 ```
+Returns number of conditions (covered and not covered) in entire program.
 
 ## totalLinesCovered
 
 ```
 totalLinesCovered();
 ```
+Returns number of lines covered in entire program.
 
 ## totalBranchesCovered
 
 ```
 totalBranchesCovered();
 ```
+Returns number of branches covered in entire program.
 
 ## totalConditionsCovered
 
 ```
 totalConditionsCovered();
 ```
+Returns number of conditions covered in entire program.
 
 ## linesCoveredInClass
 
 ```
 linesCoveredInClass(String className);
 ```
+Returns number of lines covered in class.
+
+**Parameters:**
+
+`String className` Name of class.
 
 ## totalLinesInClass
 
 ```
 totalLinesInClass(String className);
 ```
+Returns number of lines (covered and not covered) in class.
+
+**Parameters:**
+
+`String className` Name of class.
 
 ## branchesCoveredInClass
 
 ```
 branchesCoveredInClass(String className);
 ```
+Returns number of branches covered in class.
+
+**Parameters:**
+
+`String className` Name of class.
 
 ## totalBranchesInClass
 
 ```
 totalBranchesInClass(String className);
 ```
+Returns number of branches (covered and not covered) in class.
+
+**Parameters:**
+
+`String className` Name of class.
 
 ## conditionsCoveredInClass
 
 ```
 conditionsCoveredInClass(String className);
 ```
+Returns number of conditions covered in class.
+
+**Parameters:**
+
+`String className` Name of class.
 
 ## totalConditionsInClass
 
 ```
 totalConditionsInClass(String className);
 ```
+Returns number of conditions (covered and not covered) in class.
+
+**Parameters:**
+
+`String className` Name of class.
 
 ## linesInMethod
 
 ```
 linesInMethod(String className, String methodName) ;
 ```
+Returns number of lines in method.
+
+**Parameters:**
+
+`String className` Name of class.
+
+'String methodName' Name of method.
 
 ## branchesInMethod
 
 ```
 branchesInMethod(String className, String methodName);
 ```
+Returns number of branches in method.
+
+**Parameters:**
+
+`String className` Name of class.
+
+'String methodName' Name of method.
 
 ## conditionsInMethod
 
 ```
 conditionsInMethod(String className, String methodName);
 ```
+Returns number of conditions in method.
+
+**Parameters:**
+
+`String className` Name of class.
+
+'String methodName' Name of method.
 
 ## linesCoveredInMethod
 
 ```
 linesCoveredInMethod(String className, String methodName);
 ```
+Returns number of lines covered in method.
+
+**Parameters:**
+
+`String className` Name of class.
+
+'String methodName' Name of method.
 
 ## branchesCoveredInMethod
 
 ```
 branchesCoveredInMethod(String className, String methodName);
 ```
+Returns number of branches covered in method.
+
+**Parameters:**
+
+`String className` Name of class.
+
+'String methodName' Name of method.
 
 ## conditionsCoveredInMethod
 
 ```
 conditionsCoveredInMethod(String className, String methodName);
 ```
+Returns number of conditions covered in method.
+
+**Parameters:**
+
+`String className` Name of class.
+
+'String methodName' Name of method.
