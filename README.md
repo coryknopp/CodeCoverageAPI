@@ -177,7 +177,7 @@ Returns number of lines in method.
 
 `String className` Name of class.
 
-'String methodName' Name of method.
+`String methodName` Name of method.
 
 ## branchesInMethod
 
@@ -190,7 +190,7 @@ Returns number of branches in method.
 
 `String className` Name of class.
 
-'String methodName' Name of method.
+`String methodName Name of method.
 
 ## conditionsInMethod
 
@@ -203,7 +203,7 @@ Returns number of conditions in method.
 
 `String className` Name of class.
 
-'String methodName' Name of method.
+`String methodName` Name of method.
 
 ## linesCoveredInMethod
 
@@ -216,7 +216,7 @@ Returns number of lines covered in method.
 
 `String className` Name of class.
 
-'String methodName' Name of method.
+`String methodName` Name of method.
 
 ## branchesCoveredInMethod
 
@@ -229,7 +229,7 @@ Returns number of branches covered in method.
 
 `String className` Name of class.
 
-'String methodName' Name of method.
+`String methodName` Name of method.
 
 ## conditionsCoveredInMethod
 
@@ -242,4 +242,4 @@ Returns number of conditions covered in method.
 
 `String className` Name of class.
 
-'String methodName' Name of method.
+`String methodName` Name of method.
