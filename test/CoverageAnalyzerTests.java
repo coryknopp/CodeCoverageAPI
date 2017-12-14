@@ -13,9 +13,6 @@ public class CoverageAnalyzerTests {
 	public static void setup(){
 		String serFilepath = "cobertura.ser";
 		analyzer = new CoverageAnalyzer(serFilepath);
-		complete = System.getProperty("isCompleteCoverage").equals("true");
-		String a = complete ? "complete" : "incomplete";
-		System.out.println("Testing on " + a + " test cases");
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -35,20 +32,15 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testLineCoverage(){
-		boolean line20 = true; //line 20 is covered in both cases
-		boolean line21 = complete ? true : false; //line 21 is covered in complete test case but not partial
-		Assert.assertEquals(analyzer.isLineCovered("shapes.Triangle", 20), line20);
-	  Assert.assertEquals(analyzer.isLineCovered("shapes.Triangle", 21), line21);
+		Assert.assertEquals(analyzer.isLineCovered("shapes.Triangle", 20), true);
+	  Assert.assertEquals(analyzer.isLineCovered("shapes.Triangle", 21), false);
 	}
 
 	@Test
 	public void testBranchCoverage(){
-		boolean line27 = true;
-		boolean line33 = true;
-		boolean line34 = complete ? true : false;
-		Assert.assertEquals(analyzer.isBranchCovered("shapes.Triangle", 27), line27);
-		Assert.assertEquals(analyzer.isBranchCovered("shapes.Triangle", 33), line33);
-		Assert.assertEquals(analyzer.isBranchCovered("shapes.Triangle", 34), line34);
+		Assert.assertEquals(analyzer.isBranchCovered("shapes.Triangle", 27), true);
+		Assert.assertEquals(analyzer.isBranchCovered("shapes.Triangle", 33), true);
+		Assert.assertEquals(analyzer.isBranchCovered("shapes.Triangle", 34), false);
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -63,7 +55,6 @@ public class CoverageAnalyzerTests {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void testWrongLineOnConditionCoverage(){
-		//line 28 is not a condition
 		Assert.assertEquals(analyzer.isConditionCovered("shapes.Triangle", 28, 0), false);
 	}
 
@@ -84,12 +75,8 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testConditionCoverage(){
-		//boolean line20_0 = complete ? true : false;
-		boolean line34_0 = complete ? true : false;
-		boolean line27_0 = true;
-		//Assert.assertEquals(analyzer.isConditionCovered("shapes.Triangle", 20, 0), line20_0);
-		Assert.assertEquals(analyzer.isConditionCovered("shapes.Triangle", 34, 0), line34_0);
-		Assert.assertEquals(analyzer.isConditionCovered("shapes.Triangle", 27, 0), line27_0);
+		Assert.assertEquals(analyzer.isConditionCovered("shapes.Triangle", 34, 0), false);
+		Assert.assertEquals(analyzer.isConditionCovered("shapes.Triangle", 27, 0), true);
 	}
 
 	@Test
@@ -99,11 +86,7 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testTotalLineCount(){
-		if (complete) {
-			Assert.assertEquals(analyzer.totalLinesCovered(), 43);
-		}else{
 			Assert.assertEquals(analyzer.totalLinesCovered(), 37);
-		}
 	}
 
 	@Test
@@ -113,8 +96,7 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testTotalConditionsCovered(){
-		int conditions_covered = complete ? 22 : 11;
-		Assert.assertEquals(analyzer.totalConditionsCovered(),conditions_covered);
+		Assert.assertEquals(analyzer.totalConditionsCovered(),11);
 	}
 
 	@Test
@@ -124,26 +106,73 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testTotalBranchesCovered(){
-		int branches_covered = complete ? 15 : 9;
-		Assert.assertEquals(analyzer.totalBranchesCovered(), branches_covered);
-	}
-
-	@Test
-	public void testLinesCoveredInClass(){
-		int lines_covered = complete ? 25 : 19;
-		Assert.assertEquals(analyzer.linesCoveredInClass("shapes.Triangle"), lines_covered);
-		Assert.assertEquals(analyzer.linesCoveredInClass("shapes.Rectangle"), 18);
+		Assert.assertEquals(analyzer.totalBranchesCovered(), 9);
 	}
 
 	@Test
 	public void testTotalLinesInClass(){
-		Assert.assertEquals(analyzer.totalLinesInClass("shapes.Triangle"), 25);
-		Assert.assertEquals(analyzer.totalLinesInClass("shapes.Rectangle"), 22);
+		Assert.assertEquals(analyzer.totalLinesInClass("shapes.Triangle"), 23);
+		Assert.assertEquals(analyzer.totalLinesInClass("shapes.Rectangle"), 20);
+	}
+
+	@Test
+	public void testLinesCoveredInClass(){
+		Assert.assertEquals(analyzer.linesCoveredInClass("shapes.Triangle"), 17);
+		Assert.assertEquals(analyzer.linesCoveredInClass("shapes.Rectangle"), 16);
+	}
+
+	@Test
+	public void testTotalConditionsInClass(){
+		Assert.assertEquals(analyzer.totalConditionsInClass("shapes.Triangle"), 17);
+		Assert.assertEquals(analyzer.totalConditionsInClass("shapes.Rectangle"), 8);
 	}
 
 	@Test
 	public void testConditionsCoveredInClass(){
-		int conditions = complete ? 17 : 14;
+		int conditions = complete ? 17 : 6;
+		Assert.assertEquals(analyzer.conditionsCoveredInClass("shapes.Triangle"), conditions);
+		Assert.assertEquals(analyzer.conditionsCoveredInClass("shapes.Rectangle"), 5);
+	}
 
+	@Test
+	public void testTotalBranchesInClass(){
+		Assert.assertEquals(analyzer.totalBranchesInClass("shapes.Triangle"), 10);
+		Assert.assertEquals(analyzer.totalBranchesInClass("shapes.Rectangle"), 8);
+	}
+
+	@Test
+	public void testBranchesCoveredInClass(){
+		Assert.assertEquals(analyzer.branchesCoveredInClass("shapes.Triangle"), 4);
+		Assert.assertEquals(analyzer.branchesCoveredInClass("shapes.Rectangle"), 5);
+	}
+
+	@Test
+	public void testLinesInMethod(){
+		Assert.assertEquals(analyzer.linesInMethod("shapes.Triangle", "classify"), 22);
+		Assert.assertEquals(analyzer.linesInMethod("shapes.Rectangle", "classify"), 5);
+	}
+
+	@Test
+	public void testBranchesInMethod(){
+		Assert.assertEquals(analyzer.branchesInMethod("shapes.Triangle", "classify"), 10);
+		Assert.assertEquals(analyzer.branchesInMethod("shapes.Rectangle", "classify"), 2);
+	}
+
+	@Test
+	public void testConditionsInMethod(){
+		Assert.assertEquals(analyzer.conditionsCoveredInMethod("shapes.Triangle", "classify"), 6);
+		Assert.assertEquals(analyzer.conditionsCoveredInMethod("shapes.Rectangle", "classify"), 2);
+	}
+
+	@Test
+	public void testLinesCoveredInMethod(){
+		Assert.assertEquals(analyzer.linesCoveredInMethod("shapes.Triangle", "classify"), 17);
+		Assert.assertEquals(analyzer.linesCoveredInMethod("shapes.Rectangle", "classify"), 5);
+	}
+
+	@Test
+	public void testBranchesCoveredInMethod(){
+		Assert.assertEquals(analyzer.branchesCoveredInMethod("shapes.Triangle", "classify"), 9);
+		Assert.assertEquals(analyzer.branchesCoveredInMethod("shapes.Rectangle", "classify"), 2);
 	}
 }
