@@ -7,7 +7,6 @@ import analyzer.*;
 public class CoverageAnalyzerTests {
 
 	public static CoverageAnalyzer analyzer;
-	public static boolean complete;
 
 	@BeforeClass
 	public static void setup(){
@@ -129,8 +128,7 @@ public class CoverageAnalyzerTests {
 
 	@Test
 	public void testConditionsCoveredInClass(){
-		int conditions = complete ? 17 : 6;
-		Assert.assertEquals(analyzer.conditionsCoveredInClass("shapes.Triangle"), conditions);
+		Assert.assertEquals(analyzer.conditionsCoveredInClass("shapes.Triangle"), 6);
 		Assert.assertEquals(analyzer.conditionsCoveredInClass("shapes.Rectangle"), 5);
 	}
 
