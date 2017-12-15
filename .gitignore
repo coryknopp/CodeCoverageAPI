@@ -16,6 +16,3 @@ cobertura.ser
 
 #Results output#
 coverageResults.csv
-
-#Jar file#
-artifacts/
