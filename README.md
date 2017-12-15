@@ -6,7 +6,7 @@ By default, CodeCoverageAPI parses Cobertura coverage data but it can easily be 
 
 # Getting Started
 
-Download `code-coverage-api-1.0.jar` and include as a dependency in your Java project.
+Download `code-coverage-api-1.0.jar` and include it as a dependency in your Java project.
 
 Initialize a `CoverageAnalyzer` object, including the path to your serialized data file as a parameter. Be sure that you use Cobertura version 2.0.3 to get your coverage information.
 
