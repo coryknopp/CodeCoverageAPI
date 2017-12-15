@@ -1,8 +1,10 @@
+package edu.umass.cs;
+
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Assert;
 
-import analyzer.*;
+import edu.umass.cs.analyzer.*;
 
 public class CoverageAnalyzerTests {
 

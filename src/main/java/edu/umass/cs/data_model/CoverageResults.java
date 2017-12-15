@@ -1,4 +1,4 @@
-package data_model;
+package edu.umass.cs.data_model;
 
 import java.util.*;
 
@@ -14,7 +14,7 @@ public class CoverageResults implements CoverageModel {
         coverage.put(classCoverage.getName(), classCoverage);
     }
 
-    public ClassCoverage get(String className) {
+    public ClassCoverage getClassCoverage(String className) {
         return coverage.get(className);
     }
 

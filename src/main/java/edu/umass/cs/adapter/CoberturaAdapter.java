@@ -1,10 +1,8 @@
-package adapter;
+package edu.umass.cs.adapter;
 
-import data_model.CoverageResults;
-import data_model.*;
+import edu.umass.cs.data_model.*;
 import net.sourceforge.cobertura.coveragedata.*;
 
-import java.util.ArrayList;
 import java.io.File;
 
 public class CoberturaAdapter implements CoverageAdapter {

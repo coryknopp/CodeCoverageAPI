@@ -1,4 +1,4 @@
-package data_model;
+package edu.umass.cs.data_model;
 
 public class Branch {
 

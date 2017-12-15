@@ -1,4 +1,4 @@
-package analyzer;
+package edu.umass.cs.analyzer;
 
 public interface ResultsAnalyzer {
 

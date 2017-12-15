@@ -1,6 +1,6 @@
-package adapter;
+package edu.umass.cs.adapter;
 
-import data_model.CoverageResults;
+import edu.umass.cs.data_model.CoverageResults;
 
 public interface CoverageAdapter {
 

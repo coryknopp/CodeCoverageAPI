@@ -1,9 +1,9 @@
-package analyzer;
+package edu.umass.cs.analyzer;
 
 import java.util.*;
 
-import adapter.CoberturaAdapter;
-import data_model.*;
+import edu.umass.cs.adapter.CoberturaAdapter;
+import edu.umass.cs.data_model.*;
 
 public class CoverageAnalyzer implements ResultsAnalyzer {
 

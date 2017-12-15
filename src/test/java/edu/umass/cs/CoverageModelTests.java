@@ -1,9 +1,11 @@
+package edu.umass.cs;
+
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Assert;
 
-import data_model.*;
-import analyzer.*;
+import edu.umass.cs.data_model.*;
+import edu.umass.cs.analyzer.*;
 
 public class CoverageModelTests{
 
@@ -13,7 +15,7 @@ public class CoverageModelTests{
   @Test(expected=NullPointerException.class)
   public void testCreateCoverageResults(){
     CoverageResults cr = new CoverageResults();
-    Assert.assertEquals(cr.get("someclass").getName(), null);
+    Assert.assertEquals(cr.getClassCoverage("someclass").getName(), null);
   }
 
   public void setup(){
