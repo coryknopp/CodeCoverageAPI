@@ -31,7 +31,7 @@ public class TriangleTest {
         assertEquals(Triangle.classify(1, 100, 100), ISOSCELES);
     }
 
-    /*@Test
+    @Test
     public void test5() {
         assertEquals(Triangle.classify(0, 0, 0), INVALID);
     }
@@ -356,5 +356,5 @@ public class TriangleTest {
     @Test
     public void testM87() {
         assertEquals(Triangle.classify(20, 30, 10), INVALID);
-    }*/
+    }
 }

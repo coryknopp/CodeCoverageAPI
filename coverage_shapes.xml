@@ -31,7 +31,7 @@
     <!-- Initialize build -->
     <target name="init">
         <mkdir dir="bin"/>
-        <mkdir dir="bin/Triangle"/>
+        <mkdir dir="bin/Shapes"/>
     </target>
 
     <!-- Compile the project -->
@@ -39,8 +39,8 @@
             depends="init"
             description="Compile all sources">
         <javac includeantruntime="true"
-               srcdir="project/Triangle/src"
-               destdir="bin/Triangle"
+               srcdir="project/Shapes/src"
+               destdir="bin/Shapes"
                source="1.7"
                target="1.7"
                compiler="javac1.7"
@@ -54,8 +54,8 @@
             depends="compile"
             description="Compile all tests">
         <javac includeantruntime="true"
-               srcdir="project/Triangle/test"
-               destdir="bin/Triangle"
+               srcdir="project/Shapes/test"
+               destdir="bin/Shapes"
                source="1.7"
                target="1.7"
                compiler="javac1.7"
@@ -77,11 +77,11 @@
             <formatter type="plain"
                        usefile="false"/>
             <classpath path=".instrumented"/>
-            <classpath path="bin/Triangle"/>
+            <classpath path="bin/Shapes"/>
             <classpath location="${junit}"/>
             <classpath location="lib/${cobertura}"/>
             <batchtest fork="true">
-                <fileset dir="project/Triangle/test">
+                <fileset dir="project/Shapes/test">
                     <include name="**/*.java"/>
                 </fileset>
             </batchtest>
@@ -95,7 +95,7 @@
         <antcall target="compile"/>
         <cobertura-instrument failOnError="true"
                               toDir=".instrumented">
-            <fileset dir="bin/Triangle">
+            <fileset dir="bin/Shapes">
                 <include name="**/*.class"/>
             </fileset>
         </cobertura-instrument>
@@ -104,10 +104,10 @@
         <mkdir dir="${dir.cov}"/>
         <cobertura-report format="html"
                           destdir="${dir.cov}"
-                          srcdir="project/Triangle/src"/>
+                          srcdir="project/Shapes/src"/>
         <cobertura-report format="summaryXml"
                           destdir="${dir.cov}"
-                          srcdir="project/Triangle/src"/>
+                          srcdir="project/Shapes/src"/>
     </target>
 
 </project>

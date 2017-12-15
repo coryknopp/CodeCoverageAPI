@@ -40,6 +40,7 @@
                nowarn="true"
                debug="yes">
             <classpath location="${junit}"/>
+            <classpath location="${cobertura}"/>
         </javac>
     </target>
 
@@ -56,6 +57,7 @@
                        usefile="false"/>
             <classpath path="output"/>
             <classpath location="${junit}"/>
+            <classpath location="${cobertura}"/>
             <batchtest fork="true">
                 <fileset dir="test">
                     <include name="**/*.java"/>
