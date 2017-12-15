@@ -1,14 +1,12 @@
 # CodeCoverageAPI
 
-To execute coverage API, run `sh build.sh`. This will run Cobertura to get coverage data and then run coverage API.
+CodeCoverageAPI is a simple Java coverage analysis tool that provides an API for formatting and visualizing code coverage results.
 
-Alternatively, run `sh run.sh` to build the coverage API without running Cobertura first. This will only work if `cobertura.ser` already exists.
-
-To run all coverage API JUnit tests, run `sh test.sh`.
+By default, CodeCoverageAPI parses Cobertura coverage data but it can easily be extended to parse any coverage data files.
 
 # Getting Started
 
-Download `code-coverage-1.0.jar` and include as a dependency in your Java project.
+Download `code-coverage-api-1.0.jar` and include as a dependency in your Java project.
 
 Initialize a `CoverageAnalyzer` object, including the path to your serialized data file as a parameter. Be sure that you use Cobertura version 2.0.3 to get your coverage information.
 
@@ -243,3 +241,9 @@ Returns number of conditions covered in method.
 `String className` Name of class.
 
 `String methodName` Name of method.
+
+## Limitations
+
+By default, Cobertura defines branches the same as conditions. We chose to define branches differently: as boolean expressions composed of one or more conditions. In our current implementation, branch coverage information is limited to `if` and `else if` statements only because of the data provided by Cobertura. A future version could read the project source files to determine full branch coverage information manually.
+
+A second limitation of CodeCoverageAPI is its inability to provide coverage data on a test method level. Ideally, users would be able to query coverage information for a specific test method or check what methods cover a particular line or project class. We are again limited by Cobertura's serialized data structure and the coverage information they choose to store. A future version could run Cobertura for each test method, thereby generating a separate coverage report for each test method. This would provide the desired level of granularity.
