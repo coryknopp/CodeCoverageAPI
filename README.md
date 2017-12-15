@@ -6,7 +6,7 @@ By default, CodeCoverageAPI parses Cobertura coverage data but it can easily be 
 
 # Getting Started
 
-Download `code-coverage-api-1.0.jar` and include as a dependency in your Java project.
+Download `code-coverage-api-1.0.jar` and include it as a dependency in your Java project.
 
 Initialize a `CoverageAnalyzer` object, including the path to your serialized data file as a parameter. Be sure that you use Cobertura version 2.0.3 to get your coverage information.
 
@@ -242,7 +242,7 @@ Returns number of conditions covered in method.
 
 `String methodName` Name of method.
 
-## Limitations
+# Limitations
 
 By default, Cobertura defines branches the same as conditions. We chose to define branches differently: as boolean expressions composed of one or more conditions. In our current implementation, branch coverage information is limited to `if` and `else if` statements only because of the data provided by Cobertura. A future version could read the project source files to determine full branch coverage information manually.
 
