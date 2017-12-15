@@ -10,6 +10,8 @@ Download `code-coverage-api-1.0.jar` and include it as a dependency in your Java
 
 Initialize a `CoverageAnalyzer` object, including the path to your serialized data file as a parameter. Be sure that you use Cobertura version 2.0.3 to get your coverage information.
 
+To run the demo CSV formatter provided with CodeCoverageAPI, execute the shell script `demo.sh` from within the `demo` directory. This will output a coverageResults.csv file with some sample coverage data formatted as a CSV.
+
 # API Methods
 
 ## isLineCovered
