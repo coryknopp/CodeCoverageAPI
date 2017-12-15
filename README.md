@@ -242,7 +242,7 @@ Returns number of conditions covered in method.
 
 `String methodName` Name of method.
 
-## Limitations
+# Limitations
 
 By default, Cobertura defines branches the same as conditions. We chose to define branches differently: as boolean expressions composed of one or more conditions. In our current implementation, branch coverage information is limited to `if` and `else if` statements only because of the data provided by Cobertura. A future version could read the project source files to determine full branch coverage information manually.
 
