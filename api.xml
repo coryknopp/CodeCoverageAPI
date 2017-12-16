@@ -4,26 +4,27 @@
               value="lib/junit-4.11.jar"/>
     <property name="cobertura"
               value="lib/cobertura-2.0.3.jar"/>
+    <property name="ser_file"
+              value="cobertura.ser"/>
 
     <!-- Clean up -->
     <target name="clean"
             description="Clean">
-        <delete dir="output"/>
+        <delete dir="target"/>
     </target>
 
     <!-- Initialize build -->
     <target name="init">
-        <mkdir dir="output"/>
-        <mkdir dir="test"/>
+        <mkdir dir="target"/>
     </target>
 
-    <!-- Compile the project -->
+    <!-- Compile the API -->
     <target name="compile"
             depends="init"
             description="Compile all sources">
         <javac includeantruntime="true"
-               srcdir="src"
-               destdir="output"
+               srcdir="src/main/java/edu/umass/cs"
+               destdir="target"
                nowarn="true"
                debug="yes">
             <classpath location="${cobertura}"/>
@@ -35,11 +36,12 @@
             depends="compile"
             description="Compile all tests">
         <javac includeantruntime="true"
-               srcdir="test"
-               destdir="output"
+               srcdir="src/test/java/edu/umass/cs"
+               destdir="target"
                nowarn="true"
                debug="yes">
             <classpath location="${junit}"/>
+            <classpath location="${cobertura}"/>
         </javac>
     </target>
 
@@ -54,10 +56,11 @@
                haltonfailure="false">
             <formatter type="plain"
                        usefile="false"/>
-            <classpath path="output"/>
+            <classpath path="target"/>
             <classpath location="${junit}"/>
+            <classpath location="${cobertura}"/>
             <batchtest fork="true">
-                <fileset dir="test">
+                <fileset dir="src/test/java">
                     <include name="**/*.java"/>
                 </fileset>
             </batchtest>
@@ -69,10 +72,10 @@
             depends="compile"
             description="Run coverage API">
         <echo message="Running coverage API..."/>
-        <java classname="Main">
-            <arg value="cobertura.ser"/>
+        <java classname="edu.umass.cs.Main">
+            <arg value="${ser_file}"/>
             <classpath>
-                <pathelement location="output"/>
+                <pathelement location="target"/>
                 <pathelement location="${junit}"/>
                 <pathelement location="${cobertura}"/>
             </classpath>
