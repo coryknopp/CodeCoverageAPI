@@ -13,3 +13,6 @@ cobertura.ser
 
 #Results output#
 coverageResults.csv
+
+#Demo class files#
+demo/output/
